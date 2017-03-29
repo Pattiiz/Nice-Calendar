@@ -25,7 +25,7 @@
 								<span class="icon-bar-color icon-bar"></span> 
 							</button>
 						</div>
-						<div class="collapse navbar-collapse"">
+						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav">
 								<li><a href="#" class="nav-ls-color">Home</a></li>
 								<li><a href="#" class="nav-ls-color" >Class schedule</a></li>
@@ -43,46 +43,80 @@
 			<h1 class="text-center padding-top-5-p padding-bott-20">Busy finder</h1>
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class="w3-panel w3-card width-100-p">
+				<div class="w3-panel w3-card width-100-p main-col-detail">
+					<div class="input-group padding-top-20">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">Search</button>
+						</span>
+					</div>
+					<div class="text-center padding-top-20">
+						<label>Or</label>
+					</div>
 					<div class="col-md-6 col-sm-6 padding-top-20">
 						<div class="form-group">
 							<label for="sel1">Faculty :</label>
 							<select class="form-control" id="sel1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<option>Information Technology</option>
 							</select>
 						</div>
 
 						<div class="form-group">
-							<label for="sel2">Department :</label>
+							<label for="sel2">Branch :</label>
 							<select class="form-control" id="sel2">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<option>All Branch</option>
+								<option>Software Engineering</option>
+								<option>Network and Syste Technology</option>
+								<option>Multimedia and Game Development</option>
+								<option>Business Intelligent</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="sel4">Course :</label>
+							<select class="form-control" id="sel4">
+								<option>All Course</option>
+								<option>Information Technology Fundamentals</option>
+								<option>Problem Solving In Information Technology</option>
+								<option>Introduction To Computer Systems</option>
+								<option>Computer Programming</option>
 							</select>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6 padding-top-20">
 						<div class="form-group">
-							<label for="sel3">Branch :</label>
+							<label for="sel3">Department :</label>
 							<select class="form-control" id="sel3">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<option>Information Technology</option>
 							</select>
 						</div>
 
 						<div class="form-group">
 							<label for="sel4">Year :</label>
 							<select class="form-control" id="sel4">
+								<option>All Year</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
 								<option>4</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="sel4">Month :</label>
+							<select class="form-control" id="sel4">
+								<option>January</option>
+								<option>Febuary</option>
+								<option>March</option>
+								<option>April</option>
+								<option>May</option>
+								<option>June</option>
+								<option>July</option>
+								<option>August</option>
+								<option>September</option>
+								<option>Octpber</option>
+								<option>November</option>
+								<option>December</option>
 							</select>
 						</div>
 					</div>
@@ -93,7 +127,6 @@
 			</div>
 			<div class="col-md-2"></div>
 		</div>
-		
 	</div>
 </body>
 </html>

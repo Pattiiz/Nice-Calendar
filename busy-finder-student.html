@@ -5,11 +5,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/search-stylesheet.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700,800,900" rel="stylesheet">
-	<link href="css/w3.css" rel="stylesheet">
+	<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<title>Nice Calendar | Class schedule</title>
+	<title>Nice Calendar | Busy finder</title>
 </head>
 <body>
 	<div class="site-wrapper">
@@ -28,8 +28,8 @@
 						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav">
 								<li><a href="#" class="nav-ls-color">Home</a></li>
-								<li class="active"><a href="#" class="activecover" >Class schedule</a></li>
-								<li><a href="#" class="nav-ls-color" >Busy finder</a></li>
+								<li><a href="#" class="nav-ls-color" >Class schedule</a></li>
+								<li class="active"><a href="#" class="activecover" >Busy finder</a></li>
 								<li><a href="#" class="nav-ls-color" >Appointment vote</a></li>
 
 							</ul>
@@ -40,19 +40,10 @@
 					</div>
 				</nav>
 			</div>
-			<h1 class="text-center padding-top-5-p padding-bott-20">Class schedule</h1>
+			<h1 class="text-center padding-top-5-p padding-bott-20">Busy finder</h1>
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="w3-panel w3-card width-100-p">
-					<div class="input-group padding-top-20">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Search</button>
-						</span>
-					</div>
-					<div class="text-center padding-top-20">
-						<label>Or</label>
-					</div>
 					<div class="col-md-6 col-sm-6 padding-top-20">
 						<div class="form-group">
 							<label for="sel1">Faculty :</label>
@@ -62,8 +53,8 @@
 						</div>
 
 						<div class="form-group">
-							<label for="sel2">Branch :</label>
-							<select class="form-control" id="sel2">
+							<label for="sel3">Branch :</label>
+							<select class="form-control" id="sel3">
 								<option>All Branch</option>
 								<option>Software Engineering</option>
 								<option>Network and Syste Technology</option>
@@ -71,11 +62,22 @@
 								<option>Business Intelligent</option>
 							</select>
 						</div>
+
+						<div class="form-group">
+							<label for="sel4">Course :</label>
+							<select class="form-control" id="sel4">
+								<option>All Course</option>
+								<option>Information Technology Fundamentals</option>
+								<option>Problem Solving In Information Technology</option>
+								<option>Introduction To Computer Systems</option>
+								<option>Computer Programming</option>
+							</select>
+						</div>
 					</div>
 					<div class="col-md-6 col-sm-6 padding-top-20">
 						<div class="form-group">
-							<label for="sel3">Department :</label>
-							<select class="form-control" id="sel3">
+							<label for="sel2">Department :</label>
+							<select class="form-control" id="sel2">
 								<option>Information Technology</option>
 							</select>
 						</div>
@@ -88,6 +90,24 @@
 								<option>2</option>
 								<option>3</option>
 								<option>4</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="sel4">Month :</label>
+							<select class="form-control" id="sel4">
+								<option>January</option>
+								<option>Febuary</option>
+								<option>March</option>
+								<option>April</option>
+								<option>May</option>
+								<option>June</option>
+								<option>July</option>
+								<option>August</option>
+								<option>September</option>
+								<option>Octpber</option>
+								<option>November</option>
+								<option>December</option>
 							</select>
 						</div>
 					</div>
