@@ -1,7 +1,13 @@
 @charset "UTF-8";
 /* CSS Document */
 /*button details*/
+a{
+	color: inherit;
+	display: block;
+	text-decoration: none;
+}
 a:focus, a:hover {
+	text-decoration: none;
 }
 .btn-default, .btn-default:hover, .btn-default:focus {
 	color: #333;
@@ -186,6 +192,7 @@ h1 {
     margin-bottom: 10px;
 	font-size: 0.7em;
 	font-weight: 200;
+	color: #000;
 }
 .event-blue{
 	border-color: #45ABCD;
@@ -193,6 +200,69 @@ h1 {
 .event-yellow{
 	border-color: #FEAF20;
 }
+
+/*Main Card Menu*/
+.menu-card{
+	color: #000;
+	padding-bottom: 20px;
+}
+.menu-card-inside{
+	background-color: #fff;
+	color: #000;
+	text-align: center;
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+	float: right;
+}
+.menu-card-inside>span{
+	margin-top: 5px;
+	vertical-align: middle;
+}
+
+/*Inside Card*/
+.eventday {
+	margin-left: 20px;
+	margin-right: 20px;
+    padding: 20px;
+    background-color: #fafafa;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+	text-align: left !important;
+	color: #000;
+}
+.eventday-sm {
+    padding: 10px;
+    font-size: 80%;
+}
+.eventday-green {
+    border-color: #80D651;
+}
+.eventday-green>strong {
+    color: #80D651;
+}
+.eventday-blue {
+    border-color: #45ABCD;
+}
+.eventday-blue>strong {
+    color: #45ABCD;
+}
+.eventday-yellow {
+    border-color: #FEAF20;
+}
+.eventday-yellow>strong {
+    color: #FEAF20 !important;
+}
+.eventday-red {
+    border-color: #d73814;
+}
+.eventday-red>strong {
+    color: #d73814;
+}
+
 
 /*media -- for other resolution*/
 @media(min-width: 1023px) {

@@ -11,7 +11,7 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/datetimepicker.js"></script>
-	<script src="js/datetimepicker.min.js"></script>
+<script src="js/datetimepicker.min.js"></script>
 <title>Nice Calendar | Main</title>
 </head>
 
@@ -55,7 +55,7 @@
                   </span> </div>
               </form>
               <div class="row contain-main">
-                <div class="col-md-4 contain-header-left">April 2017</div>
+                <div class="col-md-4 contain-header-left">31 April 2017<span class="contain-header-date"> </span></div>
                 <div class="col-md-4">
                   <ul class="pagination contain-header-mid">
                     <li><a href="main-d.html" class="contain-header-mid-detail">Day</a></li>
@@ -76,76 +76,11 @@
                 </div>
               </div>
               <div class="row contain-main">
-                <table class="table contain-table">
-                  <thead class="contain-table-head">
-                    <tr>
-                      <td>MON</td>
-                      <td>TUE</td>
-                      <td>WED</td>
-                      <td>THU</td>
-                      <td>FRI</td>
-                      <td>SAT</td>
-                      <td>SUN</td>
-                    </tr>
-                  </thead>
-                  <tbody class="contain-table-date">
-                    <tr>
-                      <td>27</td>
-                      <td>28</td>
-                      <td>29</td>
-                      <td>30</td>
-                      <td>31
-                        <a href="#" data-toggle="modal" data-target="#myDetail01"><div class="event event-yellow">ส่งงาน webpro</div></a></td>
-                      <td class="contain-table-holiday"><div class="contain-table-active">1</div></td>
-                      <td class="contain-table-holiday">2</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td>6</td>
-                      <td>7</td>
-                      <td class="contain-table-holiday">8</td>
-                      <td class="contain-table-holiday">9</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>11</td>
-                      <td>12</td>
-                      <td>13</td>
-                      <td>14</td>
-                      <td class="contain-table-holiday">15</td>
-                      <td class="contain-table-holiday">16</td>
-                    </tr>
-                    <tr>
-                      <td>17</td>
-                      <td>18</td>
-                      <td>19</td>
-                      <td>20</td>
-                      <td>21</td>
-                      <td class="contain-table-holiday">22</td>
-                      <td class="contain-table-holiday">23</td>
-                    </tr>
-                    <tr>
-                      <td>24</td>
-                      <td>25</td>
-                      <td>26</td>
-                      <td>27</td>
-                      <td>28</td>
-                      <td class="contain-table-holiday">29</td>
-                      <td class="contain-table-holiday">30</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>3</td>
-                      <td>4</td>
-                      <td>5</td>
-                      <td class="contain-table-holiday">6</td>
-                      <td class="contain-table-holiday">7</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="w3-panel w3-card card-main-detail">
+                  <p>
+                  <div class="eventday eventday-yellow"> <strong>23.30 - 23.55</strong> ส่งงาน Webpro </div>
+                  </p>
+                </div>
               </div>
             </div>
             <div class="col-md-1"></div>
@@ -180,11 +115,16 @@
         </div>
         <div class="form-group">
           <label for="detail">Start</label>
-    		<input size="16" type="text" value="" readonly class="form_datetime">
+          <input size="16" type="text" value="" readonly class="form_datetime">
         </div>
         <div class="form-group">
           <label for="detail">End</label>
-    		<input size="16" type="text" value="" readonly class="form_datetime">
+          <input size="16" type="text" value="" readonly class="form_datetime">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allday" value="1">
+            All day events</label>
         </div>
         <button type="submit" class="btn-default btn-submit" >Add</button>
       </div>
@@ -204,8 +144,7 @@
         <h4 class="modal-title">ส่งงาน webpro</h4>
       </div>
       <div class="modal-body">
-        <p>Date: 31 April 2017</p>
-        <p>Time: 23.30 - 23.55</p>
+        <p>Date : 31 April 2017</p>
         <p>ส่งงาน front-end webprogramming</p>
         <button type="button" class="btn-default btn-submit" >Delete</button>
         <button type="button" class="btn-default btn-submit" >Edit</button>
@@ -216,7 +155,6 @@
     </div>
   </div>
 </div>
-
 <script>
 	$(document).ready(function(){       
             var scroll_pos = 0;
