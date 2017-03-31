@@ -1,8 +1,14 @@
 @charset "UTF-8";
 /* CSS Document */
 /*button details*/
-a:focus,
-a:hover {
+a{
+	color: inherit;
+	display: block;
+	text-decoration: none;
+}
+a:focus, a:hover {
+	text-decoration: none;
+	color: inherit;
 }
 .btn-default,
 .btn-default:hover,
@@ -98,6 +104,9 @@ h1{
 }
 
 /*modal lightbox*/
+.modal-open{
+	color: #000;
+}
 .modal-content{
 	color: black;
 	margin-top: 40%;
@@ -160,7 +169,7 @@ h1{
     border-color: #45ABCD;
 }
 .notice-blue>strong {
-    color: #45ABCD;
+    color: #45ABCD !important;
 }
 .notice-yellow {
     border-color: #FEAF20;
@@ -173,6 +182,18 @@ h1{
 }
 .notice-red>strong {
     color: #d73814;
+}
+.title-green>strong{
+	color: #80D651;
+}
+.title-blue>strong{
+	 color: #45ABCD
+}
+.title-yellow>strong{
+	color: #FEAF20
+}
+.title-red>strong{
+	color: #d73814
 }
 
 /*media -- for other resolution*/

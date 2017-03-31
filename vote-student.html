@@ -25,7 +25,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
-                <li><a href="#" class="nav-list-detail" >Home</a></li>
+                <li><a href="main.html" class="nav-list-detail" >Home</a></li>
                 <li><a href="search-course.html" class="nav-list-detail" >Class schedule</a></li>
                 <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
                 <li class="active"><a href="vote.html"  class="activecover">Appointment vote</a></li>
@@ -44,9 +44,6 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 main-col-detail">
-              <div class="menu-card"> <a data-toggle="modal" data-target="#myAdd">
-                <div class="menu-card-inside"> <span class="glyphicon glyphicon-plus"></span> </div>
-                </a> </div>
               <div class="w3-panel w3-card card-main-detail">
                 <p> 
                 <a data-toggle="modal" data-target="#myDetail01" class="title-blue">
@@ -68,91 +65,6 @@
     </div>
   </div>
 </div>
-<div id="myAdd" class="modal fade" role="dialog">
-  <div class="modal-dialog"> 
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add your Poll</h4>
-      </div>
-      <div class="modal-body">
-        <p>Enter your details.</p>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="detail">Description</label>
-          <textarea class="form-control" rows="3" id="detail"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="sel1">Faculty :</label>
-          <select class="form-control" id="sel1">
-            <option>Information Technology</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="sel3">Major :</label>
-          <select class="form-control" id="sel2">
-            <option>All Major</option>
-            <option>Software Engineering</option>
-            <option>Network and Syste Technology</option>
-            <option>Multimedia and Game Development</option>
-            <option>Business Intelligent</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="sel4">Course :</label>
-          <select class="form-control" id="sel3">
-            <option>All Course</option>
-            <option>Information Technology Fundamentals</option>
-            <option>Problem Solving In Information Technology</option>
-            <option>Introduction To Computer Systems</option>
-            <option>Computer Programming</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="sel2">Department :</label>
-          <select class="form-control" id="sel4">
-            <option>Information Technology</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="sel4">Year :</label>
-          <select class="form-control" id="sel5">
-            <option>All Year</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="detail">Start</label>
-          <input size="16" type="text" value="" readonly class="form_datetime">
-        </div>
-        <div class="form-group">
-          <label for="detail">End</label>
-          <input size="16" type="text" value="" readonly class="form_datetime">
-        </div>
-        <div class="form-group">
-          <label for="detail">Poll Start</label>
-          <input size="16" type="text" value="" readonly class="form_datetime">
-        </div>
-        <div class="form-group">
-          <label for="detail">Poll End</label>
-          <input size="16" type="text" value="" readonly class="form_datetime">
-        </div>
-        <button type="submit" class="btn-default btn-submit" >Add</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 <div id="myDetail01" class="modal fade" role="dialog">
   <div class="modal-dialog"> 
     
@@ -167,15 +79,14 @@
         <p>Date: 20 April 2017</p>
         <p>Time: 13.30 - 15.30</p>
         <p>ลงคะแนนเลือกวันเรียนชดเชย ITF</p>
-        <strong>Result</strong>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="50"
-  aria-valuemin="0" aria-valuemax="100" style="width:50%"> 50% </div>
+        <strong>Vote</strong>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allday" value="1">
+            Check to vote this</label>
         </div>
-        <button type="button" class="btn-default btn-submit">Delete</button>
-        <a href="vote-e.html">
-        <button type="button" class="btn-default btn-submit" >Edit</button>
-        </a> </div>
+        <button type="submit" class="btn-default btn-submit" >Vote</button>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -196,15 +107,14 @@
         <p>Date: 20 April 2017</p>
         <p>Time: 13.30 - 15.30</p>
         <p>ลงคะแนนเลือกวันเรียนชดเชย PSIT</p>
-        <strong>Result</strong>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="50"
-  aria-valuemin="0" aria-valuemax="100" style="width:50%"> 50% </div>
+        <strong>Vote</strong>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allday" value="1">
+            Check to vote this</label>
         </div>
-        <button type="button" class="btn-default btn-submit">Delete</button>
-        <a href="vote-e2.html">
-        <button type="button" class="btn-default btn-submit" >Edit</button>
-        </a> </div>
+        <button type="submit" class="btn-default btn-submit" >Vote</button>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -225,15 +135,14 @@
         <p>Date: 20 April 2017</p>
         <p>Time: 13.30 - 15.30</p>
         <p>ลงคะแนนเลือกวันที่จะเรียน ICS วันจันทร์</p>
-        <strong>Result</strong>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="50"
-  aria-valuemin="0" aria-valuemax="100" style="width:50%"> 50% </div>
+        <strong>Vote</strong>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allday" value="1">
+            Check to vote this</label>
         </div>
-        <button type="button" class="btn-default btn-submit">Delete</button>
-        <a href="vote-e3.html">
-        <button type="button" class="btn-default btn-submit" >Edit</button>
-        </a> </div>
+        <button type="submit" class="btn-default btn-submit" >Vote</button>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
