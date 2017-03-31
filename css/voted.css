@@ -1,0 +1,234 @@
+@charset "UTF-8";
+/* CSS Document */
+/*button details*/
+a:focus, a:hover {
+}
+.btn-default, .btn-default:hover, .btn-default:focus {
+	color: #333;
+	text-shadow: none; /* Prevent inheritance from `body` */
+	background-color: #fff;
+	border: 1px solid #fff;
+}
+/*whole page*/
+html, body {
+	color: white;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	background-color: #90a7d0;
+	background-size: cover;
+	font-family: 'Prompt', sans-serif !important;
+}
+h1 {
+	font-family: 'Prompt', sans-serif !important;
+}
+/*site wrapper for coverpage*/
+.site-wrapper {
+	display: table;
+	width: 100%;
+	height: 100%; /* For at least Firefox */
+	min-height: 100%;
+	background-color: #90a7d0;
+}
+.site-wrapper-inner {
+	display: table-cell;
+}
+.cover-container {
+	margin-right: auto;
+	margin-left: auto;
+}
+/*inner -- center part of the page*/
+.inner {
+	padding-top: 10%;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+/*masthead -- head part of the page*/
+.masthead {
+	position: fixed;
+	top: 0px;
+	width: 95%;
+	left: 50%;
+	margin-left: -47.5%;
+}
+/*masfoot -- buttom part of the page*/
+.mastfoot {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	left: 50%;
+	margin-left: -50%;
+}
+/*navigation bar*/
+.navbarcover {
+	background-color: rgba(104,104,104,0.5);
+	border-color: rgba(214,213,218,0.0);
+	color: #000;
+}
+.activecover, .activecover:focus, .activecover:hover {
+	background-color: #707071 !important;
+	color: #fff !important;
+}
+.nav-list-detail {
+	color: #fff !important;
+}
+.nav-list-detail:focus, .nav-list-detail:hover {
+	color: #353535 !important;
+}
+.navabr-toggle {
+	border-color: #fff;
+}
+.icon-bar-inverse {
+	background-color: #fff !important;
+}
+/*modal lightbox*/
+.modal-content {
+	color: black;
+	margin-top: 40%;
+}
+.btn-submit {
+	border-color: black;
+}
+/*Main Calender*/
+.contain-main {
+	background-color: #fff;
+	border-radius: 6px;
+}
+.contain-header-left {
+	color: #000;
+	font-weight: 100;
+	font-size: 200%;
+}
+.contain-header-mid {
+	margin-top: 10px;
+	margin-bottom: 7px;
+}
+.contain-header-right {
+	margin-top: 10px;
+	margin-bottom: 7px;
+}
+.contain-header-mid-detail {
+	color: #000 !important;
+	font-weight: 100;
+	width: 80px;
+}
+.contain-header-right-detail {
+	color: #000 !important;
+	font-weight: 100;
+	width: 60px;
+}
+.contain-table {
+	height: 700px;
+}
+.contain-table tbody>tr>td {
+	width: 50px;
+	table-layout: fixed;
+	border: 1px solid #D8D8D8 !important;
+	text-align: right;
+}
+.contain-table-head {
+	color: #fff !important;
+	background-color: rgba(66,66,66,0.90);
+}
+.contain-table-date {
+	color: #000 !important;
+}
+.contain-table-holiday {
+	background-color: rgba(155,155,155,0.55);
+}
+.contain-table-active {
+	display: block;
+	text-align: center;
+	background-color: #FF1B1F;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	float: right;
+}
+/*Main Card*/
+.card-main-detail {
+	background-color: #fff;
+	width: 100%;
+	height: 500px;
+	overflow-y: scroll;
+}
+/*Main Card Menu*/
+.menu-card {
+	color: #000;
+	padding-bottom: 20px;
+}
+.menu-card-inside {
+	background-color: #fff;
+	color: #000;
+	text-align: center;
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+	float: right;
+}
+.menu-card-inside>span {
+	margin-top: 5px;
+	vertical-align: middle;
+}
+/*Inside Card*/
+.notice {
+	padding: 15px;
+	background-color: #fafafa;
+	border-left: 6px solid #7f7f84;
+	margin-bottom: 10px;
+	-webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+	box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+	text-align: left !important;
+	color: #000;
+}
+.notice-sm {
+	padding: 10px;
+	font-size: 80%;
+}
+.notice-green {
+	border-color: #80D651;
+}
+.notice-green>strong {
+	color: #80D651;
+}
+.notice-blue {
+	border-color: #45ABCD;
+}
+.notice-blue>strong {
+	color: #45ABCD;
+}
+.notice-yellow {
+	border-color: #FEAF20;
+}
+.notice-yellow>strong {
+	color: #FEAF20;
+}
+.notice-red {
+	border-color: #d73814;
+}
+.notice-red>strong {
+	color: #d73814;
+}
+
+/*media -- for other resolution*/
+@media(min-width: 1023px) {
+.contain-header-left {
+	text-align: left;
+	padding-left: 10px;
+}
+.contain-header-right {
+	margin-right: 10px;
+	display: block;
+	float: right;
+}
+}
+.red{
+	background: rgba(255,0,0,0.80);
+}
+.green{
+	background: rgba(0,255,0,0.80);
+}
+.yellow{
+	background: rgba(255,255,15,0.80);
+}
