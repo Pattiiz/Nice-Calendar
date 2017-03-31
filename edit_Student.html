@@ -3,19 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/student.css">
+	<link href="css/student.css" rel="stylesheet">
 	<link href="css/w3.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700,800,900" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<title>Nice Calendar | Profile</title>
+	<title>Nice Calendar | Profile </title>
 </head>
 <body>
 	<div class="site-wrapper">
 		<div class="cover-container">
 			<div class="row-fluid padding-top-10">
-				<nav class="navbar navbar-default navbarcover">
+				<nav class="navbar navbar-default navbarcover fixed-top">
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<a class="navbar-brand nav-ls-color" href="#">NC</a>
@@ -25,78 +25,71 @@
 								<span class="icon-bar-color icon-bar"></span> 
 							</button>
 						</div>
-						<div class="collapse navbar-collapse"">
+						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav">
 								<li><a href="#" class="nav-ls-color">Home</a></li>
 								<li><a href="#" class="nav-ls-color" >Class schedule</a></li>
 								<li><a href="#" class="nav-ls-color" >Busy finder</a></li>
 								<li><a href="#" class="nav-ls-color" >Appointment vote</a></li>
-								<li class="active"><a href="#" class="activecover" >Profile</a></li>
-
-
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
+								<li class="active"><a href="#" class="activecover" >Profile</a></li>
 								<li><a class="nav-ls-color" href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 							</ul>
 						</div>
 					</div>
 				</nav>
 			</div>
-			<div class="inner">
-				<center>
-					<h1> Profile </h1>
-				</center>
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-2"></div>
-						<div class="col-md-8 main-col-detail">
-						<center>
-							<div class="imgprof"><img src="img/john-wick.jpg"></div>
-						</center>
-							<div class="w3-panel w3-card card-main-detail"><p>
-								<div class="notice notice-blue">
-									<strong>Student_ID: </strong> 58070000
-								</div>
-							</p></div>
-							<div class="w3-panel w3-card card-main-detail"><p>
-								<div class="notice notice-blue">
-									<strong>Old_Password: </strong>  <input type="password" class="form-control" id="usr">
-								</div>
-							</p></div>
-							<div class="w3-panel w3-card card-main-detail"><p>
-								<div class="notice notice-blue">
-									<strong>New_Password: </strong>  <input type="password" class="form-control" id="usr">
-								</div>
-							</p></div>
-							<div class="w3-panel w3-card card-main-detail"><p>
-								<div class="notice notice-blue">
-									<strong>First_Name: </strong> <input type="text" class="form-control" id="usr">
-								</div>
-							</p></div>
-							<div class="w3-panel w3-card card-main-detail"><p>
-								<div class="notice notice-blue">
-									<strong>Last_Name: </strong>  <input type="text" class="form-control" id="usr">
-								</div>
-							</p></div>
-							<div class="w3-panel w3-card card-main-detail"><p>
-								<div class="notice notice-blue">
-									<strong>Email: </strong>  <input type="text" class="form-control" id="usr">
-								</div>
-							</p></div>
-						</div>
-						<div class="col-md-2"></div>
+			<h1 class="text-center padding-top-10-p padding-bott-20"> Profile </h1>
+			<div class="col-md-2"></div>
+			<div class="col-md-8 main-col-detail">
+				<div class="padding-bott-20">
+					<center>
+						<img src="img/profile-icon.jpg">
+					</center>
+				</div>
+				<div class="w3-panel w3-card card-main-detail">
 
+					<div class="notice notice-blue">
+						<strong>Student ID : </strong> 58070000
+					</div>
+					<div class="notice notice-blue">
+						<strong>Old password : </strong>  <input type="password" class="form-control" id="usr">
+					</div>
+					<div class="notice notice-blue">
+						<strong>New password : </strong>  <input type="password" class="form-control" id="usr">
+					</div>
+					<div class="notice notice-blue">
+						<strong>First name : </strong> <input type="text" class="form-control" id="usr">
+					</div>
+					<div class="notice notice-blue">
+						<strong>Last name : </strong>  <input type="text" class="form-control" id="usr">
+					</div>
+					<div class="notice notice-blue">
+						<strong>E-mail : </strong>  <input type="text" class="form-control" id="usr">
 					</div>
 					<div class="text-center padding-bott-10">
-						<div class="btn btn-default padding" type="button">DONE</div>
+						<div class="btn btn-default padding" type="button">Confirm</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
-</div>
-</div>
-
-
+<script>
+	$(document).ready(function(){       
+            var scroll_pos = 0;
+            $(document).scroll(function() { 
+                scroll_pos = $(this).scrollTop();
+                if(scroll_pos > 20) {
+                    $(".navbarcover").css('background-color', 'rgba(104,104,104,1.0)');
+                } else {
+                    $(".navbarcover").css('background-color', 'rgba(104,104,104,0.5)');
+                }
+            });
+        });
+	
+	$(".form_datetime").datetimepicker({format: 'dd-mm-yy hh:ii'});
+</script>
 </body>
 </html>
