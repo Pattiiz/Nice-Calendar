@@ -34,7 +34,6 @@
                 <li><a href="#" class="nav-list-detail" >Appointment vote</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" class="nav-list-detail" >Profile</a></li>
                 <li><a href="#myModal" data-toggle="modal" class="nav-list-detail" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
               </ul>
             </div>
@@ -79,7 +78,7 @@
               <div class="row contain-main">
                 <div class="w3-panel w3-card card-main-detail">
                   <p>
-                  <a href="#" data-toggle="modal" data-target="#myDetail01"><div class="eventday eventday-yellow"><strong class="strong-yellow">23.30 - 23.55</strong> ส่งงาน Webpro </div></a>
+                  <a href="#" data-toggle="modal" data-target="#myDetail01"><div class="eventday eventday-yellow"> <strong>23.30 - 23.55</strong> ส่งงาน Webpro </div></a>
                   </p>
                 </div>
               </div>
@@ -148,10 +147,51 @@
         <p>Date : 31 April 2017</p>
         <p>ส่งงาน front-end webprogramming</p>
         <button type="button" class="btn-default btn-submit" >Delete</button>
-        <a href="main-de.html"><button type="button" class="btn-default btn-submit" >Edit</button></a>
+        <button type="button" class="btn-default btn-submit" >Edit</button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div id="myEdit" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit your events</h4>
+      </div>
+      <div class="modal-body">
+        <p>Enter your details.</p>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" value="ส่งงาน Webpro" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="detail">Description</label>
+          <textarea class="form-control" rows="3"> วันส่งงาน front-end webprogramming </textarea>
+        </div>
+        <div class="form-group">
+          <label for="detail">Start</label>
+          <input size="16" type="text" value="31-03-17 23:30" readonly class="form_datetime">
+        </div>
+        <div class="form-group">
+          <label for="detail">End</label>
+          <input size="16" type="text" value="31-03-17 23:55" readonly class="form_datetime">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="allday" value="1">
+            All day events</label>
+        </div>
+        <button type="submit" class="btn-default btn-submit" >Add</button>
+      </div>
+      <div class="modal-footer">
+        <a href="main-d.html"><button type="button" class="btn btn-default">Close</button></a>
       </div>
     </div>
   </div>
@@ -170,6 +210,12 @@
         });
 	
 	$(".form_datetime").datetimepicker({format: 'dd-mm-yy hh:ii'});
+	
+    $(document).ready(function () {
+
+    $('#myEdit').modal('show');
+
+});
 	</script>
 </body>
 </html>
