@@ -1,21 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/search-stylesheet.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700,800,900" rel="stylesheet">
+	<link href="css/student.css" rel="stylesheet">
 	<link href="css/w3.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700,800,900" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<title>Nice Calendar | Class schedule</title>
+	<title>Nice Calendar | Profile </title>
 </head>
 <body>
 	<div class="site-wrapper">
 		<div class="cover-container">
 			<div class="row-fluid padding-top-10">
-				<nav class="navbar navbar-default navbarcover">
+				<nav class="navbar navbar-default navbarcover fixed-top">
 					<div class="container-fluid">
 						<div class="navbar-header">
 							<a class="navbar-brand nav-ls-color" href="#">NC</a>
@@ -29,38 +29,64 @@
 							<ul class="nav navbar-nav">
 								<li><a href="#" class="nav-ls-color">Home</a></li>
 								<li><a href="#" class="nav-ls-color" >Class schedule</a></li>
-								<li class="active"><a href="#" class="activecover" >Busy finder</a></li>
+								<li><a href="#" class="nav-ls-color" >Busy finder</a></li>
 								<li><a href="#" class="nav-ls-color" >Appointment vote</a></li>
-
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
+								<li class="active"><a href="#" class="activecover" >Profile</a></li>
 								<li><a class="nav-ls-color" href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 							</ul>
 						</div>
 					</div>
 				</nav>
 			</div>
-			<h1 class="text-center padding-top-5-p padding-bott-20">Busy finder</h1>
+			<h1 class="text-center padding-top-10-p padding-bott-20"> Profile </h1>
 			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-8 main-col-detail">
+				<div class="padding-bott-20">
+					<center>
+						<img src="img/profile-icon.jpg">
+					</center>
+				</div>
 				<div class="w3-panel w3-card width-100-p">
 					<div class="notice notice-blue">
-						<strong>Fundamental English 1</strong>
-						<p>กลุ่ม : 1,2 อาจารย์ผู้สอน : อ.อดัม</p>
+						<strong>Student ID : </strong>  5807000
 					</div>
 					<div class="notice notice-blue">
-						<strong>Fundamental English 1</strong>
-						<p>กลุ่ม : 3 อาจารย์ผู้สอน : อ.สมศรี</p>
+						<strong>First name : </strong>  john
 					</div>
 					<div class="notice notice-blue">
-						<strong>Fundamental Thai 1</strong>
-						<p>กลุ่ม : 1 อาจารย์ผู้สอน : ครูทอม คําไทย</p>
+						<strong>Last name : </strong>  wick
 					</div>
-					
+					<div class="notice notice-blue">
+						<strong>E-mail : </strong>  aaaaaa@gmail.com
+					</div>
+					<div class="text-center padding-bott-10">
+						<div class="btn btn-default padding" type="button">Edit</div>
+					</div>
 				</div>
+				
 			</div>
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+</div>
+</div>
+</div>
+<script>
+	$(document).ready(function(){       
+            var scroll_pos = 0;
+            $(document).scroll(function() { 
+                scroll_pos = $(this).scrollTop();
+                if(scroll_pos > 20) {
+                    $(".navbarcover").css('background-color', 'rgba(104,104,104,1.0)');
+                } else {
+                    $(".navbarcover").css('background-color', 'rgba(104,104,104,0.5)');
+                }
+            });
+        });
+	
+	$(".form_datetime").datetimepicker({format: 'dd-mm-yy hh:ii'});
+</script>
 </body>
 </html>

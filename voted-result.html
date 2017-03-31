@@ -3,13 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/voted.css" rel="stylesheet">
+<link href="css/main-stylesheet.css" rel="stylesheet">
 <link href="css/w3.css" rel="stylesheet">
+<link href="css/datetimepicker.css" rel="stylesheet" />
+<link href="css/voted.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Prompt:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<title>Nice Calendar | Status</title>
+<script src="js/datetimepicker.js"></script>
+  <script src="js/datetimepicker.min.js"></script>
+<title>Nice Calendar | Main</title>
 </head>
 
 <body>
@@ -25,14 +29,13 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
-                <li><a href="#" class="nav-list-detail">Home</a></li>
+                <li class="active"><a href="#" class="activecover">Home</a></li>
                 <li><a href="#" class="nav-list-detail" >Class schedule</a></li>
                 <li><a href="#" class="nav-list-detail" >Busy finder</a></li>
                 <li><a href="#" class="nav-list-detail" >Appointment vote</a></li>
-                <li class="active"><a href="#" class="activecover" >Status</a></li>
-                <li><a href="#" class="nav-list-detail" >Time Schedule</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="nav-list-detail" >Profile</a></li>
                 <li><a href="#myModal" data-toggle="modal" class="nav-list-detail" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
               </ul>
             </div>
@@ -41,7 +44,7 @@
         </p>
       </div>
       <div class="inner">
-        <h1>Status</h1>
+        <h1>Appointment Vote</h1>
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-1"></div>
@@ -174,5 +177,20 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function(){       
+            var scroll_pos = 0;
+            $(document).scroll(function() { 
+                scroll_pos = $(this).scrollTop();
+                if(scroll_pos > 20) {
+                    $(".navbarcover").css('background-color', 'rgba(104,104,104,1.0)');
+                } else {
+                    $(".navbarcover").css('background-color', 'rgba(104,104,104,0.5)');
+                }
+            });
+        });
+  
+  $(".form_datetime").datetimepicker({format: 'dd-mm-yy hh:ii'});
+</script>
 </body>
 </html>

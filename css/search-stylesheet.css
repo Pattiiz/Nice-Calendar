@@ -25,6 +25,11 @@ h1 {
 }
 
 /*navigation bar*/
+.fixed-top{
+	position: fixed;
+	z-index: 10;
+	width: 95%;
+}
 .navbarcover{
 	background-color: rgba(104,104,104,0.5);
 	border-color: rgba(214,213,218,0.0);
