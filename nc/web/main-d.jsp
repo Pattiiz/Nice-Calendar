@@ -42,6 +42,8 @@
             DateFormat df2 = new SimpleDateFormat("yyyy-M-d");
             ServletContext ctx = getServletContext();
             Connection caldtb = (Connection) ctx.getAttribute("connection");
+            String person_who = (String) session.getAttribute("who");
+            String user_id = (String) session.getAttribute("user_id");
             List<String> month_title = Arrays.asList("January", "Febuary", "March", "April", "May", "June",
                     "July", "August", "September", "October", "November", "December");
             List<Integer> odd_month = Arrays.asList(1, 3, 5, 7, 8, 10, 12);
@@ -124,7 +126,7 @@
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li><a href="profile-student.html" class="nav-list-detail" >Profile</a></li>
-                                        <li><a href="#myModal" data-toggle="modal" class="nav-list-detail" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                        <li><a href="logout.process" data-toggle="modal" class="nav-list-detail" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -169,7 +171,7 @@
                                     </div>
                                     <div class="row contain-main" style="">
                                         <div style="margin-top: 10px;"><%
-                                            appointment = cm.getAppointment(caldtb);
+                                            appointment = cm.getAppointment(caldtb, person_who, user_id);
                                             date_mark_check = cm.getYear() + "-" + cm.getMonth() + "-" + cm.getDay();
                                             for (int k = 0; k < appointment.size(); k++) {%>
                                             <a href="#" data-toggle="modal" data-target="#detail<%= appointment.get(k).getAppnt_no()%>">
