@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Logging in please wait...</title>");
             out.println("</head>");
             out.println("<body>");
             String user = request.getParameter("username");
@@ -61,6 +61,8 @@ public class LoginServlet extends HttpServlet {
             cm.setDay(date.get(Calendar.DATE));
             cm.setMonth(date.get(Calendar.MONTH) + 1);
             cm.setYear(date.get(Calendar.YEAR));
+            String page = "";
+            int flag_check = 0;
 
             try {
                 String send_usr = user;
@@ -90,40 +92,65 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("dsp_method", "start");
                         session.setAttribute("user_id", student.getStudent_id());
                         session.setAttribute("cm", cm);
-                        response.sendRedirect("main.jsp");
+                        page = "main.jsp";
+                        flag_check = 1;
                     } else {
-                        response.sendRedirect("loginerror.jsp?result=wpass&user=" + send_usr);
-                    }
-                } else {
-                    String sql2 = "select * from teacher where username='" + user + "'";
-                    ResultSet rs2 = stmt.executeQuery(sql2);
-                    if (rs2.next()) {
-                        staff.setUsername(rs2.getString("username"));
-                        staff.setPassword(rs2.getString("password"));
-                        staff.setFname(rs2.getString("fname"));
-                        staff.setLname(rs2.getString("lname"));
-                        staff.setEmail(rs2.getString("email"));
-                        if (pass.equals(staff.getPassword())) {
-                            HttpSession session = request.getSession();
-                            session.setMaxInactiveInterval(15 * 60);
-                            session.setAttribute("person", staff);
-                            session.setAttribute("who", "staff");
-                            session.setAttribute("dsp_method", "start");
-                            session.setAttribute("user_id", staff.getUsername());
-                            session.setAttribute("cm", cm);
-                            response.sendRedirect("main.jsp");
-
-                        } else {
-                            response.sendRedirect("loginerror.jsp?result=wpass&user=" + send_usr);
-                        }
-                    } else {
-
-                        response.sendRedirect("loginerror.jsp?result=nouser&user=" + send_usr);
+                        page = "loginerror.jsp?result=wpass&user=" + send_usr;
                     }
                 }
+                String sql2 = "select * from teacher where username='" + user + "'";
+                ResultSet rs2 = stmt.executeQuery(sql2);
+                if (rs2.next() || flag_check == 0) {
+                    staff.setUsername(rs2.getString("username"));
+                    staff.setPassword(rs2.getString("password"));
+                    staff.setFname(rs2.getString("fname"));
+                    staff.setLname(rs2.getString("lname"));
+                    staff.setEmail(rs2.getString("email"));
+                    if (pass.equals(staff.getPassword())) {
+                        HttpSession session = request.getSession();
+                        session.setMaxInactiveInterval(15 * 60);
+                        session.setAttribute("person", staff);
+                        session.setAttribute("who", "teacher");
+                        session.setAttribute("dsp_method", "start");
+                        session.setAttribute("user_id", staff.getUsername());
+                        session.setAttribute("cm", cm);
+                        page = "main.jsp";
+                        flag_check = 1;
+                    } else {
+                        page = "loginerror.jsp?result=wpass&user=" + send_usr;
+                    }
+                }
+                String sql3 = "select * from officer where username='" + user + "'";
+                ResultSet rs3 = stmt.executeQuery(sql3);
+                if (rs3.next() || flag_check == 0) {
+                    staff.setUsername(rs3.getString("username"));
+                    staff.setPassword(rs3.getString("password"));
+                    staff.setFname(rs3.getString("fname"));
+                    staff.setLname(rs3.getString("lname"));
+                    staff.setEmail(rs3.getString("email"));
+                    if (pass.equals(staff.getPassword())) {
+                        HttpSession session = request.getSession();
+                        session.setMaxInactiveInterval(15 * 60);
+                        session.setAttribute("person", staff);
+                        session.setAttribute("who", "staff");
+                        session.setAttribute("dsp_method", "start");
+                        session.setAttribute("user_id", staff.getUsername());
+                        session.setAttribute("cm", cm);
+                        page = "main.jsp";
+                        flag_check = 1;
+                    } else {
+                        page = "loginerror.jsp?result=wpass&user=" + send_usr;
+                    }
+                } else {
+                    if(flag_check == 0){
+                        page = "loginerror.jsp?result=nouser&user=" + send_usr;
+                    }
+                }
+
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            response.sendRedirect(page);
             out.println("</body>");
             out.println("</html>");
         }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 
 
@@ -84,8 +86,10 @@ public class Calendarmodel {
                 Statement stmt = caldtb.createStatement();
                 String sql = "SELECT * from manage join appointment on (appointment_id = appointment_appointment_id) "
                         + "where appointment_date = '" + year + "-" + month + "-" + day + "' "
-                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and student_student_id ='" + user + "'";
-                debug = "or appointment_date ='" + year + "-" + month + "-" + day + "' and student_student_id ='" + user + "'" ;
+                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and student_student_id ='" + user + "'"
+                        + "union all"
+                        + "SELECT * from appointment where appointment_type = 'university'";
+
                 ResultSet rs = stmt.executeQuery(sql);
 
                 while (rs.next()) {
@@ -101,10 +105,52 @@ public class Calendarmodel {
                     app.add(ap);
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                Logger.getLogger(Calendarmodel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if(person_who.equals("staff") ){
-            
+        } else if (person_who.equals("teacher")) {
+            try {
+                Statement stmt = caldtb.createStatement();
+                String sql2 = "SELECT * from appointment"
+                        + "where appointment_date = '" + year + "-" + month + "-" + day + "' "
+                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and teacher_username ='" + user + "'";
+                ResultSet rs = stmt.executeQuery(sql2);
+                while (rs.next()) {
+                    Appointment ap = new Appointment();
+                    ap.setAppnt_no(rs.getString("appointment_id"));
+                    ap.setTitle(rs.getString("appointment_title"));
+                    ap.setDescription(rs.getString("description"));
+                    ap.setAppnt_start_date(rs.getDate("appointment_date"));
+                    ap.setAppnt_end_date(rs.getDate("appointment_end_date"));
+                    ap.setAppnt_start_time(rs.getTime("appointment_time"));
+                    ap.setAppnt_end_time(rs.getTime("appointment_end_time"));
+                    ap.setAppnt_type(rs.getString("appointment_type"));
+                    app.add(ap);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Calendarmodel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (person_who.equals("staff")) {
+            try {
+                Statement stmt = caldtb.createStatement();
+                String sql3 = "SELECT * from appointment"
+                        + "where appointment_date = '" + year + "-" + month + "-" + day + "' "
+                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and officer_username ='" + user + "'";
+                ResultSet rs = stmt.executeQuery(sql3);
+                while (rs.next()) {
+                    Appointment ap = new Appointment();
+                    ap.setAppnt_no(rs.getString("appointment_id"));
+                    ap.setTitle(rs.getString("appointment_title"));
+                    ap.setDescription(rs.getString("description"));
+                    ap.setAppnt_start_date(rs.getDate("appointment_date"));
+                    ap.setAppnt_end_date(rs.getDate("appointment_end_date"));
+                    ap.setAppnt_start_time(rs.getTime("appointment_time"));
+                    ap.setAppnt_end_time(rs.getTime("appointment_end_time"));
+                    ap.setAppnt_type(rs.getString("appointment_type"));
+                    app.add(ap);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Calendarmodel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return app;

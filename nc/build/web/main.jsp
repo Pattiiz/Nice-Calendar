@@ -4,6 +4,7 @@
     Author     : Plaster
 --%>
 
+<%@page import="model.Course"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -30,6 +31,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.min.js"></script>
         <script src="js/datetimepicker.js"></script>
         <script src="js/datetimepicker.min.js"></script>
         <title>Nice Calendar | Main</title>
@@ -45,8 +47,10 @@
             int date_count = 0;
             List<Appointment> appointment;
             DateFormat df = new SimpleDateFormat("yyyy-M-d");
+            DateFormat df2 = new SimpleDateFormat("d-MM-yyyy");
+            DateFormat df3 = new SimpleDateFormat("HH:mm");
             String date_mark_check = null;
-            String person_who = (String)session.getAttribute("who");
+            String person_who = (String) session.getAttribute("who");
             ServletContext ctx = getServletContext();
             Connection caldtb = (Connection) ctx.getAttribute("connection");
             List<String> month_title = Arrays.asList("January", "Febuary", "March", "April", "May", "June",
@@ -102,7 +106,7 @@
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li><a href="profile-student.html" class="nav-list-detail" >Profile</a></li>
-                                        <li><a href="#myModal" data-toggle="modal" class="nav-list-detail" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                        <li><a href="logout.process" class="nav-list-detail"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -244,13 +248,13 @@
                         </div>
                     </div>
                     <div class="mastfoot">
-                        
+
                         <p>Information Technology, King Mongkut's Institude Technology of Ladkrabang.</p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Modal -->
+        <!--Add Modal -->
         <div id="myAdd" class="modal fade" role="dialog">
             <div class="modal-dialog"> 
 
@@ -262,23 +266,82 @@
                     </div>
                     <div class="modal-body">
                         <p>Enter your details.</p>
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="detail">Description</label>
-                            <textarea class="form-control" rows="3" id="detail"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="detail">Start</label>
-                            <input size="16" type="text" value="" readonly class="form_datetime">
-                        </div>
-                        <div class="form-group">
-                            <label for="detail">End</label>
-                            <input size="16" type="text" value="" readonly class="form_datetime">
-                        </div>
-                        <button type="submit" class="btn-default btn-submit" >Add</button>
+                        <form action="appointment.process" method="GET">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="detail">Description</label>
+                                <textarea name="description" class="form-control" rows="3" id="detail"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="start_time">Start</label>
+                                <input name="start" size="16" type="text" value="" readonly class="form_datetime">
+                            </div>
+                            <div class="form-group">
+                                <label for="end_time">End</label>
+                                <input name="end" size="16" type="text" value="" readonly class="form_datetime">
+                            </div>
+                            <% if (person_who.equals("staff") || person_who.equals("teacher")) { %>
+                            <p><input type="checkbox" id="blocked" name="blocked" /> Share events to your students</p><br>
+                            <div class="form-group">
+                                <label for="sel1">Faculty :</label>
+                                <select name="faculty" class="form-control optionlist" id="faculty_id" disabled>
+                                    <option>Information Technology</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel4">Department :</label>
+                                <select name="department" class="form-control" id="dept_id" disabled>
+                                    <option selected value="all">All Department</option>
+                                    <% Course cou_d = new Course();
+                                    List<Course> all_department = cou_d.getNameAllDepartment(caldtb);
+                                    for(int i=0; i < all_department.size(); i++){ %>
+                                    <option name="<%= all_department.get(i).getDepartment() %>"><%= all_department.get(i).getDepartment() %></option>
+                                     <% }
+                                    %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel2">Major / Track :</label>
+                                <select name="branch" class="form-control" id="major_id" disabled>
+                                    <option selected value="all">All Major / Track</option>
+                                    <% Course cou_b = new Course();
+                                    List<Course> all_branch = cou_b.getNameAllBranch(caldtb);
+                                    for(int i=0; i < all_branch.size(); i++){ %>
+                                    <option name="<%= all_branch.get(i).getBranch() %>"><%= all_branch.get(i).getBranch() %></option>
+                                     <% }
+                                    %>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel5">Year :</label>
+                                <select name="year" class="form-control optionlist" id="year_id" disabled>
+                                    <option value="all">All Year</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sel3">Course :</label>
+                                <select name="course" class="form-control optionlist" id="course_id" disabled>
+                                    <option value="all">All Course</option>
+                                    <% Course cou_s = new Course();
+                                    List<Course> all_course = cou_s.getNameAllCourse(caldtb);
+                                    for(int i=0; i < all_course.size(); i++){ %>
+                                    <option name="<%= all_course.get(i).getCourse_id() %>"><%=all_course.get(i).getCourse_name() %></option>
+                                     <% }
+                                    %>
+                                </select>
+                            </div>
+                            <%}%>
+
+                            <button type="submit" class="btn-default btn-submit" >Add</button>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -286,7 +349,7 @@
                 </div>
             </div>
         </div>
-        <!-- Modal -->
+        <!--Jump Modal -->
         <div id="myJump" class="modal fade" role="dialog">
             <div class="modal-dialog"> 
 
@@ -358,14 +421,13 @@
                     </div>
                     <div class="modal-body">
                         <p>Date: <%if (appointment.get(k).getAppnt_start_date().equals(appointment.get(k).getAppnt_end_date())) {%>
-                            <%= appointment.get(k).getAppnt_start_date()%>
-                            <% } else {%> <%= appointment.get(k).getAppnt_start_date()%> - <%= appointment.get(k).getAppnt_end_date()%> <% }%></p>
-                        <p>Time: <%= appointment.get(k).getAppnt_start_time()%> - <%= appointment.get(k).getAppnt_end_time()%></p>
+                            <%= df2.format(appointment.get(k).getAppnt_start_date())%>
+                            <% } else {%> <%= df2.format(appointment.get(k).getAppnt_start_date())%> - <%= df2.format(appointment.get(k).getAppnt_end_date())%> <% }%></p>
+                        <p>Time: <%= df3.format(appointment.get(k).getAppnt_start_time())%> - <%= df3.format(appointment.get(k).getAppnt_end_time())%></p>
                         <p> <%= appointment.get(k).getDescription()%> </p>
                         <button type="button" class="btn-default btn-submit">Delete</button>
-                        <a href="main-e.html">
-                            <button type="button" class="btn-default btn-submit" >Edit</button>
-                        </a> </div>
+                        <button type="button" class="btn-default btn-submit" ><a href="#" data-toggle="modal" data-target="#edit<%= appointment.get(k).getAppnt_no()%>">Edit</a></button>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -376,29 +438,84 @@
             }
 
         %>
-        <div id="myDetail01" class="modal fade" role="dialog">
-            <div class="modal-dialog"> 
-
+        <!-- Appointment edit modal -->
+        <% appointment_phase = 0;
+            undate_flag = 0;
+            for (int i = 0; i < 42; i++) {
+                if (mc.get(i).equals("1") && undate_flag == 0) {
+                    undate_flag = 1;
+                    appointment_phase = 1;
+                } else if (mc.get(i).equals("1") && undate_flag == 1) {
+                    undate_flag = 0;
+                    appointment_phase = 2;
+                }
+                Calendarmodel cm3 = new Calendarmodel();
+                cm3.setDay(Integer.parseInt(mc.get(i)));
+                if (appointment_phase == 0) {
+                    if (cm.getMonth() == 1) {
+                        cm3.setMonth(12);
+                        cm3.setYear(cm.getYear() - 1);
+                    } else {
+                        cm3.setMonth(cm.getMonth() - 1);
+                        cm3.setYear(cm.getYear());
+                    }
+                } else if (appointment_phase == 1) {
+                    cm3.setMonth(cm.getMonth());
+                    cm3.setYear(cm.getYear());
+                } else {
+                    if (cm.getMonth() == 12) {
+                        cm3.setMonth(1);
+                        cm3.setYear(cm.getYear() + 1);
+                    } else {
+                        cm3.setMonth(cm.getMonth() + 1);
+                        cm3.setYear(cm.getYear());
+                    }
+                }
+                appointment = cm3.getAppointment(caldtb, person_who, user_id);
+                date_mark_check = cm3.getYear() + "-" + cm3.getMonth() + "-" + cm3.getDay();
+                for (int k = 0; k < appointment.size(); k++) {%>
+        <div id="edit<%= appointment.get(k).getAppnt_no()%>" class="modal fade" role="dialog">
+            <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">ส่งงาน webpro</h4>
+                        <h4 class="modal-title">Edit your events: <%= appointment.get(k).getTitle()%></h4>
                     </div>
                     <div class="modal-body">
-                        <p>Date: 31 April 2017</p>
-                        <p>Time: 23.30 - 23.55</p>
-                        <p>ส่งงาน front-end webprogramming</p>
-                        <button type="button" class="btn-default btn-submit">Delete</button>
-                        <a href="main-e.html">
-                            <button type="button" class="btn-default btn-submit" >Edit</button>
-                        </a> </div>
+                        <form action="EditAppointmentServlet" method="POST">
+                            <div style="height: 0px; overflow: hidden;">
+                                <input type="text" name="id" value="<%=appointment.get(k).getAppnt_no()%>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="title" value="<%= appointment.get(k).getTitle()%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" rows="3" name="description" ><%= appointment.get(k).getDescription()%></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="start_time">Start</label>
+                                <input size="16" type="text" name="start" value="<%=df2.format(appointment.get(k).getAppnt_start_date())%> <%=df3.format((appointment.get(k).getAppnt_start_time()))%>" readonly class="form_datetime">
+                            </div>
+                            <div class="form-group">
+                                <label for="start_time">End</label>
+                                <input size="16" type="text" name="end" value="<%=df2.format(appointment.get(k).getAppnt_end_date())%> <%=df3.format((appointment.get(k).getAppnt_end_time()))%>" readonly class="form_datetime">
+                            </div>
+                            <button type="button" class="btn-default btn-submit">Apply</button>
+                        </form>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
+        <% }
+            }
+
+        %>
         <script>
             $(document).ready(function () {
                 var scroll_pos = 0;
@@ -416,9 +533,30 @@
             $(".form_month_year").datetimepicker({format: 'mm-yyyy',
                 startView: "year",
                 minView: "year"});
-            function reLoad() {
-                location.reload();
-            }
+            $('#blocked').change(function () {
+                $("#faculty_id").prop("disabled", !$(this).is(':checked'));
+                $("#dept_id").prop("disabled", !$(this).is(':checked'));
+                $("#major_id").prop("disabled", !$(this).is(':checked'));
+                $("#course_id").prop("disabled", !$(this).is(':checked'));
+                $("#year_id").prop("disabled", !$(this).is(':checked'));
+            });
+            $(document).ready(function () {
+
+                $("#dept_id").change(function () {
+
+                    var el = $(this);
+                    $("#major_id option:last-child").remove();
+                    if (el.val() === "Information Technology") {
+                        $("#major_id").append("<option>Software Engineering</option>\n\
+            <option>Network and System Technology</option>\n\
+<option>Multimedia and Game Development</option>\n\
+<option>Business Intelligent</option>");
+                    } else if (el.val() === "Business Information Technology") {
+                        $("#major_id").append("<option> Business Information Technology</option>");
+                    }
+                });
+
+            });
         </script>
 
     </body>

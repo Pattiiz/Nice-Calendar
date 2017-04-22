@@ -1,16 +1,25 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author phatm
  */
 public class Student {
+
     private String student_id;
     private String password;
     private String fname;
@@ -20,6 +29,7 @@ public class Student {
     private String department;
     private String faculty;
     private int year;
+    private final List<String> student_all = new ArrayList<>();
 
     /**
      * @return the student_id
@@ -146,5 +156,38 @@ public class Student {
     public void setYear(int year) {
         this.year = year;
     }
-    
+
+    public List<String> getStudentId(Connection caldtb, String course) {
+        try {
+            Statement stmt = caldtb.createStatement();
+            String sql1 = "select DISTINCT student_id from student join branch "
+                    + "on (branch_branch_name = branch_name) "
+                    + "join department "
+                    + "on (department_department_name = department_name) "
+                    + "join faculty "
+                    + "on (faculty_faculty_name = faculty_name) where ";
+            if(!this.department.equals("all")){
+                sql1 += "faculty_name='" + this.faculty + "' AND ";
+            }
+            if(!this.branch.equals("all")){
+                sql1 += "branch_name ='" + this.branch + "' AND ";
+            }
+            if(this.year != 0){
+                sql1 += "year_year =" + String.valueOf(this.year) + " AND ";
+            }
+            if(!course.equals("all")){
+                sql1 += "course_id = '" + course + "' AND ";
+            }
+            sql1 += "fname like '%%' order by student_id";
+            ResultSet rs = stmt.executeQuery(sql1);
+            while(rs.next()){
+                student_all.add(rs.getString("student_id"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return student_all;
+    }
+
 }
