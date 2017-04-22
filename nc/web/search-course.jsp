@@ -1,0 +1,120 @@
+<%-- 
+    Document   : search-course
+    Created on : Apr 22, 2017, 4:04:21 PM
+    Author     : phatm
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/search-stylesheet.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Prompt:300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="css/w3.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <title>Nice Calendar | Class schedule</title>
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <div class="cover-container">
+                <div class="row-fluid padding-top-10">
+                    <nav class="navbar navbar-default navbarcover">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand nav-ls-color" href="#">NC</a>
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="icon-bar-color icon-bar"></span>
+                                    <span class="icon-bar-color icon-bar"></span>
+                                    <span class="icon-bar-color icon-bar"></span> 
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="main.jsp" class="nav-ls-color">Home</a></li>
+                                    <li class="active"><a href="search-course.jsp" class="activecover" >Class schedule</a></li>
+                                    <li><a href="find-a-teacher.html" class="nav-ls-color" >Busy finder</a></li>
+                                    <li><a href="vote.html" class="nav-ls-color" >Appointment vote</a></li>
+
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="profile.jsp" class="nav-ls-color">Profile</a></li>
+                                    <li><a class="nav-ls-color" href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <h1 class="text-center padding-top-5-p padding-bott-20">Class schedule</h1>
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="w3-panel w3-card width-100-p">
+                        <form action="search.process" method="POST">
+                            <div class="input-group padding-top-20">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Search</button>
+                                </span>
+                            </div>
+                        </form>
+                        <div class="text-center padding-top-20">
+                            <label>Or</label>
+                        </div>
+                        <form action="search.process" method="POST">
+                            <div class="col-md-6 col-sm-6 padding-top-20">
+                                <div class="form-group">
+                                    <label for="sel1">Faculty :</label>
+                                    <select class="form-control" id="sel1" name="faculty">
+                                        <option>Information Technology</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sel2">Major :</label>
+                                    <select class="form-control" id="sel2" name="major">
+                                        <option>All Major</option>
+                                        <option>Software Engineering</option>
+                                        <option>Network and Syste Technology</option>
+                                        <option>Multimedia and Game Development</option>
+                                        <option>Business Intelligent</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 padding-top-20">
+                                <div class="form-group">
+                                    <label for="sel3">Department :</label>
+                                    <select class="form-control" id="sel3" name="department">
+                                        <option>Information Technology</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sel4">Year :</label>
+                                    <select class="form-control" id="sel4" name="year">
+                                        <option>All Year</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-center padding-bott-10">
+                                <a href="result-course.html">
+                                    <button class="btn btn-default padding" type="submit">Search</button>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="text-center footer">
+            <p>Information Technology, King Mongkut's Institude Technology of Ladkrabang.</p>
+        </div>
+    </body>
+</html>

@@ -58,6 +58,14 @@ h1 {
 	border-radius: 50%;
 }
 
+.footer {
+	color: white;
+	bottom: 0px;
+	width: 100%;
+	height: 100px;
+	margin-top: 30px;
+}
+
 /*Card*/
 .notice {
     padding: 15px;

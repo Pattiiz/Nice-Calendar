@@ -6,7 +6,6 @@ h1 {
 	color: white;
 	font-family: 'Prompt', sans-serif !important;
 }
-
 .w3-panel{
 	background-color: white;
 }
@@ -23,15 +22,6 @@ h1 {
 	margin-right: auto;
 	margin-left: auto;
 }
-.footer {
-	color: white;
-	bottom: 0px;
-	width: 100%;
-	height: 100px;
-	margin-top: 30px;
-}
-
-/*navigation bar*/
 .fixed-top{
 	position: fixed;
 	z-index: 10;
@@ -62,33 +52,21 @@ h1 {
 	background-color: #fff !important;
 }
 
-/*padding*/
-.padding-top-10{
-	padding-top: 10px;
-}
-.padding-top-15{
-	padding-top: 15px;
-}
-.padding-top-5-p{
-	padding-top: 5%;
-}
-.padding-top-20{
-	padding-top: 20px;
-}
-.padding-bott-10{
-	padding-bottom: 10px;
-}
-.padding-bott-20{
-	padding-bottom: 20px;
-}
-.padding-left-10{
-	padding-left: 10px;
-}
-.width-100-p{
-	width: 100%;
+.profile-img{
+	max-height: 30px;
+	max-width: auto;
+	border-radius: 50%;
 }
 
-/*Result Page*/
+.footer {
+	color: white;
+	bottom: 0px;
+	width: 100%;
+	height: 100px;
+	margin-top: 30px;
+}
+
+/*Card*/
 .notice {
     padding: 15px;
     background-color: #fafafa;
@@ -106,4 +84,29 @@ h1 {
 }
 .notice-blue>strong {
     color: #45ABCD;
+}
+
+/*Padding*/
+.width-100-p{
+	width: 100%;
+}
+.padding-top-10{
+	padding-top: 10px;
+}
+.padding-top-5-p{
+	padding-top: 5%;
+}
+.padding-top-10-p{
+	padding-top: 10%;
+}
+.padding-bott-10{
+	padding-bottom: 10px;
+}
+.padding-bott-20{
+	padding-bottom: 20px;
+}
+
+img{
+	border-radius: 50%;
+	width: 200px;
 }
