@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main-stylesheet.css" rel="stylesheet">
         <link href="css/w3.css" rel="stylesheet">
@@ -34,7 +34,7 @@
         <script src="js/jquery.min.js"></script>
         <script src="js/datetimepicker.js"></script>
         <script src="js/datetimepicker.min.js"></script>
-        <title>Nice Calendar | Main</title>
+        <title>ESMICs | Main</title>
     </head>
     <body>
         <%if (session.getAttribute("person") == null) { %>
@@ -94,18 +94,22 @@
                         <p>
                         <nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
-                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="#">NC</a>
+                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="#">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> </button>
                                 </div>
                                 <div class="collapse navbar-collapse" id="myNavbar">
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><a href="main.html" class="activecover">Home</a></li>
-                                        <li><a href="search-course.html" class="nav-list-detail" >Class schedule</a></li>
+                                        <li class="active"><a href="main.jsp" class="activecover">Home</a></li>
+                                        <li><a href="schedule.jsp" class="nav-list-detail" >Class schedule</a></li>
+                                        <% if(person_who.equals("student")){ %>
                                         <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
-                                        <li><a href="vote-student.html" class="nav-list-detail" >Appointment vote</a></li>
+                                        <%}else{%>
+                                        <li><a href="find-a-student.jsp" class="nav-list-detail" >Busy finder</a></li>
+                                        <%} %>
+                                        <li><a href="vote.jsp" class="nav-list-detail" >Appointment vote</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="profile-student.html" class="nav-list-detail" >Profile</a></li>
+                                        <li><a href="profile.jsp" class="nav-list-detail" >Profile</a></li>
                                         <li><a href="logout.process" class="nav-list-detail"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                     </ul>
                                 </div>
@@ -119,12 +123,12 @@
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-10">
-                                    <form>
-                                        <div class="row input-group search-bar">
-                                            <input type="text" class="form-control" placeholder="Search" />
+                                    <form action="search.process" method="GET">
+                                        <div class="row input-group search-bar"> 
+                                            <input name="search" type="text" class="form-control" placeholder="Search" />
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default btn-search" type="submit"> <span class="glyphicon glyphicon-search"></span> </button>
-                                            </span> </div>
+                                            </span></div>
                                     </form>
                                     <div class="row contain-main">
                                         <div class="col-md-4 contain-header-left"><%= month_title.get(cm.getMonth() - 1)%> <%= cm.getYear()%></div>
@@ -232,9 +236,9 @@
 
                                                             <% }
                                                             %>
-                                                        </div><%if (appointment.size() >= 3) {%><div style="font-size: 10px;"> <a href="main-d.jsp?jump=<%=cm2.getDay()%>-<%=cm2.getMonth()%>-<%=cm2.getYear()%>"><%= appointment.size() - 2%> more...</a></div><%}%></td>
+                                                        </div><%if (appointment.size() >= 3) {%><div style="font-size: 10px;"> <a href="main-d.jsp?jump=<%=cm2.getDay()%>-<%=cm2.getMonth()%>-<%=cm2.getYear()%>"> more...</a></div><%}%></td>
                                                     <% date_count++;
-                                                            } %> </tr>
+                                                        } %> </tr>
                                                     <% }%>
 
 
@@ -296,10 +300,10 @@
                                 <select name="department" class="form-control" id="dept_id" disabled>
                                     <option selected value="all">All Department</option>
                                     <% Course cou_d = new Course();
-                                    List<Course> all_department = cou_d.getNameAllDepartment(caldtb);
-                                    for(int i=0; i < all_department.size(); i++){ %>
-                                    <option name="<%= all_department.get(i).getDepartment() %>"><%= all_department.get(i).getDepartment() %></option>
-                                     <% }
+                                        List<Course> all_department = cou_d.getNameAllDepartment(caldtb);
+                                        for (int i = 0; i < all_department.size(); i++) {%>
+                                    <option name="<%= all_department.get(i).getDepartment()%>"><%= all_department.get(i).getDepartment()%></option>
+                                    <% }
                                     %>
                                 </select>
                             </div>
@@ -308,12 +312,12 @@
                                 <select name="branch" class="form-control" id="major_id" disabled>
                                     <option selected value="all">All Major / Track</option>
                                     <% Course cou_b = new Course();
-                                    List<Course> all_branch = cou_b.getNameAllBranch(caldtb);
-                                    for(int i=0; i < all_branch.size(); i++){ %>
-                                    <option name="<%= all_branch.get(i).getBranch() %>"><%= all_branch.get(i).getBranch() %></option>
-                                     <% }
+                                        List<Course> all_branch = cou_b.getNameAllBranch(caldtb);
+                                        for (int i = 0; i < all_branch.size(); i++) {%>
+                                    <option name="<%= all_branch.get(i).getBranch()%>"><%= all_branch.get(i).getBranch()%></option>
+                                    <% }
                                     %>
-                                    
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -331,10 +335,10 @@
                                 <select name="course" class="form-control optionlist" id="course_id" disabled>
                                     <option value="all">All Course</option>
                                     <% Course cou_s = new Course();
-                                    List<Course> all_course = cou_s.getNameAllCourse(caldtb);
-                                    for(int i=0; i < all_course.size(); i++){ %>
-                                    <option name="<%= all_course.get(i).getCourse_id() %>"><%=all_course.get(i).getCourse_name() %></option>
-                                     <% }
+                                        List<Course> all_course = cou_s.getNameAllCourse(caldtb);
+                                        for (int i = 0; i < all_course.size(); i++) {%>
+                                    <option name="<%= all_course.get(i).getCourse_id()%>"><%=all_course.get(i).getCourse_name()%></option>
+                                    <% }
                                     %>
                                 </select>
                             </div>
@@ -424,8 +428,11 @@
                             <%= df2.format(appointment.get(k).getAppnt_start_date())%>
                             <% } else {%> <%= df2.format(appointment.get(k).getAppnt_start_date())%> - <%= df2.format(appointment.get(k).getAppnt_end_date())%> <% }%></p>
                         <p>Time: <%= df3.format(appointment.get(k).getAppnt_start_time())%> - <%= df3.format(appointment.get(k).getAppnt_end_time())%></p>
-                        <p> <%= appointment.get(k).getDescription()%> </p>
-                        <button type="button" class="btn-default btn-submit">Delete</button>
+                        <p> <%= appointment.get(k).getDescription()%> </p><form action="delapp.process" method="GET">
+                            <div style="height: 0px; overflow: hidden;">
+                                <input type="text" name="id" value="<%=appointment.get(k).getAppnt_no()%>" readonly>
+                            </div>
+                            <button type="submit" class="btn-default btn-submit">Delete</button> </form>
                         <button type="button" class="btn-default btn-submit" ><a href="#" data-toggle="modal" data-target="#edit<%= appointment.get(k).getAppnt_no()%>">Edit</a></button>
                     </div>
                     <div class="modal-footer">
@@ -483,7 +490,7 @@
                         <h4 class="modal-title">Edit your events: <%= appointment.get(k).getTitle()%></h4>
                     </div>
                     <div class="modal-body">
-                        <form action="EditAppointmentServlet" method="POST">
+                        <form action="editapp.process" method="GET">
                             <div style="height: 0px; overflow: hidden;">
                                 <input type="text" name="id" value="<%=appointment.get(k).getAppnt_no()%>" readonly>
                             </div>
@@ -503,7 +510,7 @@
                                 <label for="start_time">End</label>
                                 <input size="16" type="text" name="end" value="<%=df2.format(appointment.get(k).getAppnt_end_date())%> <%=df3.format((appointment.get(k).getAppnt_end_time()))%>" readonly class="form_datetime">
                             </div>
-                            <button type="button" class="btn-default btn-submit">Apply</button>
+                            <button type="submit" class="btn-default btn-submit">Apply</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -540,23 +547,7 @@
                 $("#course_id").prop("disabled", !$(this).is(':checked'));
                 $("#year_id").prop("disabled", !$(this).is(':checked'));
             });
-            $(document).ready(function () {
 
-                $("#dept_id").change(function () {
-
-                    var el = $(this);
-                    $("#major_id option:last-child").remove();
-                    if (el.val() === "Information Technology") {
-                        $("#major_id").append("<option>Software Engineering</option>\n\
-            <option>Network and System Technology</option>\n\
-<option>Multimedia and Game Development</option>\n\
-<option>Business Intelligent</option>");
-                    } else if (el.val() === "Business Information Technology") {
-                        $("#major_id").append("<option> Business Information Technology</option>");
-                    }
-                });
-
-            });
         </script>
 
     </body>

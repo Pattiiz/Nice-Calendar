@@ -82,7 +82,7 @@ public class AppointmentServlet extends HttpServlet {
             }
             try {
                 stmt = caldtb.createStatement();
-                String sql = "SELECT * appointment_id from appointment order by appointment_id DESC limit 1";
+                String sql = "SELECT appointment_id from appointment order by appointment_id *1 DESC limit 1";
                 ResultSet rs = stmt.executeQuery(sql);
                 if (rs.next()) {
                     last_id = Integer.parseInt(rs.getString("appointment_id")) + 1;
@@ -95,20 +95,22 @@ public class AppointmentServlet extends HttpServlet {
                     String sql2 = "INSERT INTO appointment (appointment_id, appointment_title, description, "
                             + "appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type) VALUES ('" + last_id + "', '" + title + "', '"
                             + description + "', '" + year_start + "-" + month_start + "-" + date_start + "', '" + year_end + "-" + month_end
-                            + "-" + date_end + "', " + time_start + ", " + time_end + ", 'personal')";
+                            + "-" + date_end + "', '" + time_start + "', '" + time_end + "', 'personal')";
                     String sql3 = "INSERT INTO manage (student_student_id, appointment_appointment_id) VALUES ('" + user_id + "', '" + last_id + "')";
                     int numrow2 = stmt.executeUpdate(sql2);
                     int numrow3 = stmt.executeUpdate(sql3);
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(AppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if (who.equals("teacher")) {
+                System.out.println("get this");
                 if (share_flag == 0) {
                     try {
                         String sql4 = "INSERT INTO appointment (appointment_id, appointment_title, description, "
                                 + "appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username) VALUES ('" + last_id + "', '" + title + "', '"
                                 + description + "', '" + year_start + "-" + month_start + "-" + date_start + "', '" + year_end + "-" + month_end
-                                + "-" + date_end + "', " + time_start + ", " + time_end + ", 'personal', '" + user_id + "')";
+                                + "-" + date_end + "', '" + time_start + "', '" + time_end + "', 'personal', '" + user_id + "')";
                         int numrow4 = stmt.executeUpdate(sql4);
                     } catch (SQLException ex) {
                         Logger.getLogger(AppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,9 +120,18 @@ public class AppointmentServlet extends HttpServlet {
                         String sql5 = "INSERT INTO appointment (appointment_id, appointment_title, description,\n"
                                 + "appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username) VALUES ('" + last_id + "', '" + title + "', '"
                                 + description + "', '" + year_start + "-" + month_start + "-" + date_start + "', '" + year_end + "-" + month_end
-                                + "-" + date_end + "', " + time_start + ", " + time_end + ", 'shared', '" + user_id + "')";
+                                + "-" + date_end + "', '" + time_start + "', '" + time_end + "', 'shared', '" + user_id + "')";
                         int numrow5 = stmt.executeUpdate(sql5);
                         Student stu = new Student();
+                        stu.setFaculty(faculty);
+                        stu.setDepartment(department);
+                        stu.setBranch(branch);
+                        if(year_app.equals("all")){
+                            stu.setYear(0);
+                        }else{
+                            stu.setYear(Integer.parseInt(year_app));
+                        }
+                        
                         List<String> all_s_id = stu.getStudentId(caldtb, course);
                         for (int i = 0; i < all_s_id.size(); i++) {
                             String sql5s = "INSERT INTO manage (student_student_id, appointment_appointment_id)\n"
@@ -137,7 +148,7 @@ public class AppointmentServlet extends HttpServlet {
                         String sql6 = "INSERT INTO appointment (appointment_id, appointment_title, description, "
                                 + "appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username) VALUES ('" + last_id + "', '" + title + "', '"
                                 + description + "', '" + year_start + "-" + month_start + "-" + date_start + "', '" + year_end + "-" + month_end
-                                + "-" + date_end + "', " + time_start + ", " + time_end + ", 'personal', '" + user_id + "')";
+                                + "-" + date_end + "', '" + time_start + "', '" + time_end + "', 'personal', '" + user_id + "')";
                         int numrow6 = stmt.executeUpdate(sql6);
                         
                     } catch (SQLException ex) {
@@ -148,7 +159,7 @@ public class AppointmentServlet extends HttpServlet {
                         String sql7 = "INSERT INTO appointment (appointment_id, appointment_title, description, "
                                 + "appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, officer_username) VALUES ('" + last_id + "', '" + title + "', '"
                                 + description + "', '" + year_start + "-" + month_start + "-" + date_start + "', '" + year_end + "-" + month_end
-                                + "-" + date_end + "', " + time_start + ", " + time_end + ", 'shared', '" + user_id + "')";
+                                + "-" + date_end + "', '" + time_start + "', '" + time_end + "', 'shared', '" + user_id + "')";
                         int numrow7 = stmt.executeUpdate(sql7);
                         Student stu2 = new Student();
                         List<String> all_s_id = stu2.getStudentId(caldtb, course);

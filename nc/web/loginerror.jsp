@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <title>Nice Calendar</title>
+        <title>ESMICs</title>
     </head>
     <body>
         <div class="site-wrapper">
@@ -25,7 +25,7 @@
                         <p><nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand list-detail" id="list-detail" href="#">NC</a>
+                                    <a class="navbar-brand list-detail" id="list-detail" href="#">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                                         <span class="icon-bar-inverse icon-bar"></span>
                                         <span class="icon-bar-inverse icon-bar"></span>

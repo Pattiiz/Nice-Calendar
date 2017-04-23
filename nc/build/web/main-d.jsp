@@ -27,7 +27,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/datetimepicker.js"></script>
         <script src="js/datetimepicker.min.js"></script>
-        <title>Nice Calendar | Main</title>
+        <title>ESMICs | Main</title>
     </head>
 
     <body>
@@ -40,6 +40,7 @@
             String date_mark_check = null;
             DateFormat df = new SimpleDateFormat("HH:mm");
             DateFormat df2 = new SimpleDateFormat("yyyy-M-d");
+            DateFormat df3 = new SimpleDateFormat("d-MM-yyyy");
             ServletContext ctx = getServletContext();
             Connection caldtb = (Connection) ctx.getAttribute("connection");
             String person_who = (String) session.getAttribute("who");
@@ -114,19 +115,23 @@
                         <p>
                         <nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
-                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="#">NC</a>
+                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="#">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> </button>
                                 </div>
                                 <div class="collapse navbar-collapse" id="myNavbar">
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><a href="main.html" class="activecover">Home</a></li>
-                                        <li><a href="search-course.html" class="nav-list-detail" >Class schedule</a></li>
+                                        <li class="active"><a href="main.jsp" class="activecover">Home</a></li>
+                                        <li><a href="schesule.jsp" class="nav-list-detail" >Class schedule</a></li>
+                                        <% if(person_who.equals("student")){ %>
                                         <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
-                                        <li><a href="vote-student.html" class="nav-list-detail" >Appointment vote</a></li>
+                                        <%}else{%>
+                                        <li><a href="find-a-student.jsp" class="nav-list-detail" >Busy finder</a></li>
+                                        <%} %>
+                                        <li><a href="vote.jsp" class="nav-list-detail" >Appointment vote</a></li>
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="profile-student.html" class="nav-list-detail" >Profile</a></li>
-                                        <li><a href="logout.process" data-toggle="modal" class="nav-list-detail" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                        <li><a href="profile.jsp" class="nav-list-detail" >Profile</a></li>
+                                        <li><a href="logout.process" class="nav-list-detail" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -254,28 +259,6 @@
                 </div>
             </div>
         </div>
-        <div id="myDetail01" class="modal fade" role="dialog">
-            <div class="modal-dialog"> 
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">ส่งงาน webpro</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Date : 31 April 2017</p>
-                        <p>ส่งงาน front-end webprogramming</p>
-                        <button type="button" class="btn-default btn-submit" >Delete</button>
-                        <a href="main-de.html">
-                            <button type="button" class="btn-default btn-submit" >Edit</button>
-                        </a> </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Modal -->
         <div id="myJump" class="modal fade" role="dialog">
             <div class="modal-dialog"> 
@@ -302,6 +285,78 @@
                 </div>
             </div>
         </div>
+        <% appointment = cm.getAppointment(caldtb, person_who, user_id);
+
+            for (int i = 0; i < appointment.size(); i++) {%>
+        <div id ="detail<%=appointment.get(i).getAppnt_no()%>" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><%=appointment.get(i).getTitle()%></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Date: <%if (appointment.get(i).getAppnt_start_date().equals(appointment.get(i).getAppnt_end_date())) {%>
+                            <%= df3.format(appointment.get(i).getAppnt_start_date())%>
+                            <% } else {%> <%= df3.format(appointment.get(i).getAppnt_start_date())%> - <%= df3.format(appointment.get(i).getAppnt_end_date())%> <% }%></p>
+                        <p>Time: <%= df.format(appointment.get(i).getAppnt_start_time())%> - <%= df.format(appointment.get(i).getAppnt_end_time())%></p>
+                        <p> <%= appointment.get(i).getDescription()%> </p>
+                        <form action="delapp.process" method="GET">
+                            <div style="height: 0px; overflow: hidden;">
+                                <input type="text" name="id" value="<%=appointment.get(i).getAppnt_no()%>" readonly>
+                            </div>
+                            <button type="submit" class="btn-default btn-submit">Delete</button> </form>
+                        <button type="button" class="btn-default btn-submit" ><a href="#" data-toggle="modal" data-target="#edit<%= appointment.get(i).getAppnt_no()%>">Edit</a></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%}
+        %>
+        <% for (int k = 0; k < appointment.size(); k++) {%>
+        <div id="edit<%= appointment.get(k).getAppnt_no()%>" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit your events: <%= appointment.get(k).getTitle()%></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="editapp.process" method="GET">
+                            <div style="height: 0px; overflow: hidden;">
+                                <input type="text" name="id" value="<%=appointment.get(k).getAppnt_no()%>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="title" value="<%= appointment.get(k).getTitle()%>">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" rows="3" name="description" ><%= appointment.get(k).getDescription()%></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="start_time">Start</label>
+                                <input size="16" type="text" name="start" value="<%=df3.format(appointment.get(k).getAppnt_start_date())%> <%=df.format((appointment.get(k).getAppnt_start_time()))%>" readonly class="form_datetime">
+                            </div>
+                            <div class="form-group">
+                                <label for="start_time">End</label>
+                                <input size="16" type="text" name="end" value="<%=df3.format(appointment.get(k).getAppnt_end_date())%> <%=df.format((appointment.get(k).getAppnt_end_time()))%>" readonly class="form_datetime">
+                            </div>
+                            <button type="submit" class="btn-default btn-submit">Apply</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
         <script>
             $(document).ready(function () {
                 var scroll_pos = 0;

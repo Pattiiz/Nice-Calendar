@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +38,7 @@ public class Course {
     private int section;
     private int year;
     private String teacher;
+    private int term;
     private final List<Course> cou = new ArrayList<>();
     private final List<Course> s_cou = new ArrayList<>();
     private final List<Course> b_cou = new ArrayList<>();
@@ -264,17 +264,20 @@ public class Course {
                     + "join faculty f\n"
                     + "on d.faculty_faculty_name = f.faculty_name\n"
                     + "where ";
-            if (this.department.equals("all")) {
-                sql1 += "faculty_name='" + this.faculty + "' AND ";
+            if (!this.department.equals("all")) {
+                sql1 += "d.department_name='" + this.faculty + "' AND ";
             }
             if (!this.branch.equals("all")) {
-                sql1 += "branch_name ='" + this.branch + "' AND ";
+                sql1 += "b.branch_name ='" + this.branch + "' AND ";
             }
             if (this.year != 0) {
-                sql1 += "year_year =" + String.valueOf(this.year) + " AND ";
+                sql1 += "cy.year_year =" + String.valueOf(this.year) + " AND ";
             }
-            if (this.course_id != null) {
-                sql1 += "course_id = '" + course_id + "' AND ";
+            if (!this.course_id.equals("all")) {
+                sql1 += "c.course_id = '" + this.course_id + "' AND ";
+            }
+            if (this.term != 0) {
+                sql1 += "c.course_term = " + this.term + "' AND ";
             }
             sql1 += "course_name like '%%' order by course_name, section_no";
             ResultSet rs = stmt.executeQuery(sql1);
@@ -282,7 +285,17 @@ public class Course {
             int sec_check = 0;
             Course cou_buf = new Course();
             List<String> teacher_list = new ArrayList<>();
+            String all_t_name = "";
+            int pass_check = 0;
             while (rs.next()) {
+                if (!rs.getString("section_no").equals(String.valueOf(sec_check)) && pass_check == 1) {
+                    System.out.println("get in");
+                    cou_buf.setTeacher(all_t_name);
+                    cou.add(cou_buf);
+                    pass_check = 0;
+                    sec_check = 0;
+                    all_t_name = "";
+                }
                 Course cou2 = new Course();
                 cou2.setCourse_id(rs.getString("course_id"));
                 cou2.setCourse_name(rs.getString("course_name"));
@@ -299,17 +312,21 @@ public class Course {
                 cou2.setSection(Integer.parseInt(rs.getString("section_no")));
                 cou2.setYear(Integer.parseInt(rs.getString("year_year")));
                 cou2.setTeacher(rs.getString("fname") + " " + rs.getString("lname"));
-                if(sec_check != cou2.getSection() || sec_check == 0){
-                    String all_t_name = "";
-                    for(int i=0; i < teacher_list.size(); i++){
-                        all_t_name += "อาจารย์" + teacher_list.get(i) + " ";
-                    }
-                    cou_buf.setTeacher(all_t_name);
-                    cou.add(cou_buf);
+                cou2.setTerm(rs.getInt("course_term"));
+
+                if (cou2.getSection() != sec_check) {
+                    all_t_name += cou2.getTeacher() + " ";
+                } else {
+                    all_t_name += cou2.getTeacher() + " ";
                 }
+                pass_check = 1;
                 sec_check = cou2.getSection();
-                teacher_list.add(cou2.getTeacher());
                 cou_buf = cou2;
+
+            }
+            if (cou_buf != null) {
+                cou_buf.setTeacher(all_t_name);
+                cou.add(cou_buf);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
@@ -322,47 +339,47 @@ public class Course {
             Statement stmt = caldtb.createStatement();
             String sql1 = "Select course_id, course_name from course";
             ResultSet rs = stmt.executeQuery(sql1);
-            while(rs.next()){
+            while (rs.next()) {
                 Course cou3 = new Course();
                 cou3.setCourse_id(rs.getString("course_id"));
                 cou3.setCourse_name(rs.getString("course_name"));
                 s_cou.add(cou3);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
         return s_cou;
     }
-    
-    public List<Course> getNameAllBranch(Connection caldtb){
+
+    public List<Course> getNameAllBranch(Connection caldtb) {
         try {
             Statement stmt = caldtb.createStatement();
             String sql1 = "Select branch_name from branch";
             ResultSet rs = stmt.executeQuery(sql1);
-            while(rs.next()){
+            while (rs.next()) {
                 Course cou4 = new Course();
                 cou4.setBranch(rs.getString("branch_name"));
                 b_cou.add(cou4);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
         return b_cou;
     }
-    
-    public List<Course> getNameAllDepartment(Connection caldtb){
+
+    public List<Course> getNameAllDepartment(Connection caldtb) {
         try {
             Statement stmt = caldtb.createStatement();
             String sql1 = "Select department_name from department";
             ResultSet rs = stmt.executeQuery(sql1);
-            while(rs.next()){
+            while (rs.next()) {
                 Course cou5 = new Course();
                 cou5.setDepartment(rs.getString("department_name"));
                 d_cou.add(cou5);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -381,6 +398,20 @@ public class Course {
      */
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    /**
+     * @return the term
+     */
+    public int getTerm() {
+        return term;
+    }
+
+    /**
+     * @param term the term to set
+     */
+    public void setTerm(int term) {
+        this.term = term;
     }
 
 }

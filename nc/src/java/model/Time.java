@@ -1,16 +1,24 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author phatm
  */
 public class Time {
+
     private String username;
     private String course_id;
     private String branch;
@@ -146,4 +154,65 @@ public class Time {
     public void setStudy_year(int study_year) {
         this.study_year = study_year;
     }
+
+    public String getFreeTimeStudent(Connection caldtb) {
+        String status = "low";
+        try {
+            Student std = new Student();
+            std.setFaculty(this.faculty);
+            std.setDepartment(this.department);
+            std.setBranch(this.branch);
+            std.setYear(this.year);
+            List<String> all_s_id = std.getStudentId(caldtb, this.course_id);
+            Statement stmt = caldtb.createStatement();
+            int count = 0;
+            for (int i = 0; i < all_s_id.size(); i++) {
+                String sql1 = "select * from manage "
+                        + "join appointment "
+                        + "on appointment_appointment_id = appointment_id "
+                        + "where student_student_id ='" + all_s_id.get(i) + "' and "
+                        + "appointment_type = 'class' and appointment_date='" + this.year + "-" + this.month + "-" + this.day + "'";
+                ResultSet rs = stmt.executeQuery(sql1);
+                while(rs.next()){
+                    count++;
+                }
+                
+            }
+            if(count>(all_s_id.size()*0.65)){
+                status = "high";
+            }else if(count>(all_s_id.size()*0.4)){
+                status = "mid";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Time.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return status;
+
+    }
+    
+    public String getFreeTimeTecher(Connection caldtb){
+        String status = "low";
+        int count = 0;
+        try {
+            Statement stmt = caldtb.createStatement();
+            String sql2="Select * from appointment "
+                    + "where teacher_username ='" + this.username + "' and appointment_date='" + this.year + "-" + this.month + "-" + this.day + "'";
+            ResultSet rs2 = stmt.executeQuery(sql2);
+            while(rs2.next()){
+                count++;
+            }
+            System.out.println(this.username);
+            if(count>4){
+                status = "high";
+            }else if (count>2){
+                status = "mid";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Time.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+        
+    }
+
 }

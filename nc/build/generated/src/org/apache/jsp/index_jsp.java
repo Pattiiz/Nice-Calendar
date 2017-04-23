@@ -54,7 +54,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n");
       out.write("        <script src=\"js/jquery.js\"></script>\n");
       out.write("        <script src=\"js/bootstrap.min.js\"></script>\n");
-      out.write("        <title>Nice Calendar</title>\n");
+      out.write("        <title>ESMICs</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        ");
@@ -76,7 +76,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <p><nav class=\"navbar navbarcover navbar-default\">\n");
       out.write("                            <div class=\"container-fluid\">\n");
       out.write("                                <div class=\"navbar-header\">\n");
-      out.write("                                    <a class=\"navbar-brand list-detail\" id=\"list-detail\" href=\"#\">NC</a>\n");
+      out.write("                                    <a class=\"navbar-brand list-detail\" id=\"list-detail\" href=\"#\">ESMICs</a>\n");
       out.write("                                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\">\n");
       out.write("                                        <span class=\"icon-bar-inverse icon-bar\"></span>\n");
       out.write("                                        <span class=\"icon-bar-inverse icon-bar\"></span>\n");

@@ -10,7 +10,7 @@
         </session-timeout>
     </session-config>
     <resource-ref>
-        <description>jdbc:mysql://localhost:3306/calendardb?zeroDateTimeBehavior=convertToNull</description>
+        <description>jdbc:mysql://localhost:3306/calendardb?useEncoding=true&amp;characterEncoding=UTF-8</description>
         <res-ref-name>caldb</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>

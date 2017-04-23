@@ -100,7 +100,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 String sql2 = "select * from teacher where username='" + user + "'";
                 ResultSet rs2 = stmt.executeQuery(sql2);
-                if (rs2.next() || flag_check == 0) {
+                if (rs2.next() && flag_check == 0) {
                     staff.setUsername(rs2.getString("username"));
                     staff.setPassword(rs2.getString("password"));
                     staff.setFname(rs2.getString("fname"));
@@ -122,7 +122,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 String sql3 = "select * from officer where username='" + user + "'";
                 ResultSet rs3 = stmt.executeQuery(sql3);
-                if (rs3.next() || flag_check == 0) {
+                if (rs3.next() && flag_check == 0) {
                     staff.setUsername(rs3.getString("username"));
                     staff.setPassword(rs3.getString("password"));
                     staff.setFname(rs3.getString("fname"));

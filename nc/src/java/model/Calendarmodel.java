@@ -84,11 +84,13 @@ public class Calendarmodel {
         if (person_who.equals("student")) {
             try {
                 Statement stmt = caldtb.createStatement();
-                String sql = "SELECT * from manage join appointment on (appointment_id = appointment_appointment_id) "
-                        + "where appointment_date = '" + year + "-" + month + "-" + day + "' "
-                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and student_student_id ='" + user + "'"
-                        + "union all"
-                        + "SELECT * from appointment where appointment_type = 'university'";
+                String sql = "SELECT appointment_id, appointment_title, description, appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username, officer_username from manage join appointment on (appointment_id = appointment_appointment_id) "
+                        + "where (appointment_date = '" + year + "-" + month + "-" + day + "' "
+                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' ) and student_student_id ='" + user + "'"
+                        + "union all "
+                        + "SELECT * from appointment where appointment_type = 'university'"
+                        + " and (appointment_date = '" + year + "-" + month + "-" + day + "' "
+                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "')";
 
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -110,9 +112,9 @@ public class Calendarmodel {
         } else if (person_who.equals("teacher")) {
             try {
                 Statement stmt = caldtb.createStatement();
-                String sql2 = "SELECT * from appointment"
-                        + "where appointment_date = '" + year + "-" + month + "-" + day + "' "
-                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and teacher_username ='" + user + "'";
+                String sql2 = "SELECT * from appointment "
+                        + "where (appointment_date = '" + year + "-" + month + "-" + day + "' "
+                        + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' )and teacher_username ='" + user + "'";
                 ResultSet rs = stmt.executeQuery(sql2);
                 while (rs.next()) {
                     Appointment ap = new Appointment();

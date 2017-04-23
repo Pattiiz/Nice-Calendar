@@ -158,6 +158,7 @@ public class Student {
     }
 
     public List<String> getStudentId(Connection caldtb, String course) {
+        student_all.clear();
         try {
             Statement stmt = caldtb.createStatement();
             String sql1 = "select DISTINCT student_id from student join branch "
