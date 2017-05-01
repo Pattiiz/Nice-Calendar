@@ -30,6 +30,7 @@ public class Poll {
     private String appnt_open_date;
     private String appnt_close_date;
     private List<String> choice;
+    private String poll_owner;
 
     /**
      * @return the appnt_no
@@ -118,9 +119,9 @@ public class Poll {
     public void openVote(Connection caldtb, String user_id, List<String> all_student) {
         int last_id = 0;
         int last_choice = 0;
+        String owner = "";
         try {
             Statement stmt = caldtb.createStatement();
-            stmt = caldtb.createStatement();
             String sql = "SELECT poll_id from poll order by poll_id *1 DESC limit 1";
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
@@ -131,8 +132,19 @@ public class Poll {
         }
         try {
             Statement stmt = caldtb.createStatement();
+            String sql_a = "SELECT fname, lname from teacher "
+                    + "where username ='" + user_id + "'";
+            ResultSet rs_a = stmt.executeQuery(sql_a);
+            if(rs_a.next()){
+                owner = rs_a.getString("fname") + " " + rs_a.getString("lname");
+            }
+        } catch (SQLException ex){
+            Logger.getLogger(AppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Statement stmt = caldtb.createStatement();
             String sql1 = "INSERT INTO poll (poll_id, poll_title, description, open_vote, close_vote) VALUES ('"
-                    + last_id + "', '" + this.title + "', '" + this.description + "', '"
+                    + last_id + "', '" + this.title + "', '" + this.description + " <br>Created by: " + owner + "', '"
                     + this.appnt_open_date + "', '" + this.appnt_close_date + "')";
             int numrow1 = stmt.executeUpdate(sql1);
             String sql2 = "INSERT INTO teacher_poll (poll_poll_id, teacher_username) VALUES ('"
@@ -261,6 +273,20 @@ public class Poll {
             Logger.getLogger(Poll.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    /**
+     * @return the poll_owner
+     */
+    public String getPoll_owner() {
+        return poll_owner;
+    }
+
+    /**
+     * @param poll_owner the poll_owner to set
+     */
+    public void setPoll_owner(String poll_owner) {
+        this.poll_owner = poll_owner;
     }
     
 }

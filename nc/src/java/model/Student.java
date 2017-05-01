@@ -162,11 +162,14 @@ public class Student {
         try {
             Statement stmt = caldtb.createStatement();
             String sql1 = "select DISTINCT student_id from student join branch "
-                    + "on (branch_branch_name = branch_name) "
+                    + "on branch_branch_name = branch_name "
                     + "join department "
-                    + "on (department_department_name = department_name) "
+                    + "on department_department_name = department_name "
                     + "join faculty "
-                    + "on (faculty_faculty_name = faculty_name) where ";
+                    + "on faculty_faculty_name = faculty_name "
+                    + "join enroll "
+                    + "on student_id = student_student_id"
+                    + "where ";
             if(!this.department.equals("all")){
                 sql1 += "faculty_name='" + this.faculty + "' AND ";
             }
@@ -177,7 +180,7 @@ public class Student {
                 sql1 += "year_year =" + String.valueOf(this.year) + " AND ";
             }
             if(!course.equals("all")){
-                sql1 += "course_id = '" + course + "' AND ";
+                sql1 += "course_course_id = '" + course + "' AND ";
             }
             sql1 += "fname like '%%' order by student_id";
             ResultSet rs = stmt.executeQuery(sql1);

@@ -57,8 +57,10 @@ public class AddScheduleServlet extends HttpServlet {
                 while(rs.next()){
                     stmt = caldtb.createStatement();
                     String sql2 = "INSERT INTO manage (student_student_id, appointment_appointment_id) VALUES ('" + user_id + "', '" + rs.getString("appointment_id")+ "')";
-                    int numrow = stmt.executeUpdate(sql2);
+                    int numrow2 = stmt.executeUpdate(sql2);
                 }
+                String sql3 = "INSERT INTO enroll (student_student_id, course_course_id, section_section_no) VALUES ('" + user_id + "', '" + rs.getString("appointment_id") + "', '" + section + "')";
+                int numrow3 = stmt.executeUpdate(sql3);
             } catch (SQLException ex) {
                 Logger.getLogger(AddScheduleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

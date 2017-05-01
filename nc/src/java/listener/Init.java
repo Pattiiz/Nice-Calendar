@@ -23,7 +23,7 @@ public class Init implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("its working");
+        
         try {
             caldb = getCaldb().getConnection();
             sce.getServletContext().setAttribute("connection", caldb);

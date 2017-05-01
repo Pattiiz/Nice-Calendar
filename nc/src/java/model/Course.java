@@ -265,18 +265,23 @@ public class Course {
                     + "on d.faculty_faculty_name = f.faculty_name\n"
                     + "where ";
             if (!this.department.equals("all")) {
+                
                 sql1 += "d.department_name='" + this.faculty + "' AND ";
             }
             if (!this.branch.equals("all")) {
+                
                 sql1 += "b.branch_name ='" + this.branch + "' AND ";
             }
             if (this.year != 0) {
+                
                 sql1 += "cy.year_year =" + String.valueOf(this.year) + " AND ";
             }
             if (!this.course_id.equals("all")) {
+                
                 sql1 += "c.course_id = '" + this.course_id + "' AND ";
             }
             if (this.term != 0) {
+                
                 sql1 += "c.course_term = " + this.term + "' AND ";
             }
             sql1 += "course_name like '%%' order by course_name, section_no";
@@ -287,9 +292,11 @@ public class Course {
             List<String> teacher_list = new ArrayList<>();
             String all_t_name = "";
             int pass_check = 0;
+            int send_check = 0;
             while (rs.next()) {
+                send_check = 1;
                 if (!rs.getString("section_no").equals(String.valueOf(sec_check)) && pass_check == 1) {
-                    System.out.println("get in");
+                    
                     cou_buf.setTeacher(all_t_name);
                     cou.add(cou_buf);
                     pass_check = 0;
@@ -324,7 +331,7 @@ public class Course {
                 cou_buf = cou2;
 
             }
-            if (cou_buf != null) {
+            if (send_check == 1) {
                 cou_buf.setTeacher(all_t_name);
                 cou.add(cou_buf);
             }

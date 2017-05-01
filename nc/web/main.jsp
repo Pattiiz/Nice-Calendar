@@ -94,14 +94,16 @@
                         <p>
                         <nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
-                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="#">ESMICs</a>
+                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="main.jsp">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> </button>
                                 </div>
                                 <div class="collapse navbar-collapse" id="myNavbar">
                                     <ul class="nav navbar-nav">
                                         <li class="active"><a href="main.jsp" class="activecover">Home</a></li>
-                                        <li><a href="schedule.jsp" class="nav-list-detail" >Class schedule</a></li>
                                         <% if(person_who.equals("student")){ %>
+                                        <li><a href="schedule.jsp" class="nav-list-detail" >Class schedule</a></li>
+                                        <% } %>
+                                        <% if(person_who.equals("student") || person_who.equals("staff")){ %>
                                         <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
                                         <%}else{%>
                                         <li><a href="find-a-student.jsp" class="nav-list-detail" >Busy finder</a></li>
@@ -182,10 +184,10 @@
                                                             if (j == 6 || j == 7) { %>
                                                         contain-table-holiday 
                                                         <% }%> "><div style="height: 75px; overflow: hidden;"> 
-                                                            <% if (String.valueOf(date.get(Calendar.DATE)).equals(mc.get(date_count)) && date.get(Calendar.MONTH) + 1 == cm.getMonth() && date.get(Calendar.YEAR) == cm.getYear()) { %>
+                                                            <% if (String.valueOf(date.get(Calendar.DATE)).equals(mc.get(date_count)) && date.get(Calendar.MONTH) + 1 == cm.getMonth() && date.get(Calendar.YEAR) == cm.getYear() && undate_flag == 1) { %>
                                                             <div class="contain-table-active">
                                                                 <% }%> <%= mc.get(date_count)%> 
-                                                                <% if (String.valueOf(date.get(Calendar.DATE)).equals(mc.get(date_count)) && date.get(Calendar.MONTH) + 1 == cm.getMonth() && date.get(Calendar.YEAR) == cm.getYear()) { %>
+                                                                <% if (String.valueOf(date.get(Calendar.DATE)).equals(mc.get(date_count)) && date.get(Calendar.MONTH) + 1 == cm.getMonth() && date.get(Calendar.YEAR) == cm.getYear() && undate_flag == 1) { %>
                                                             </div>
                                                             <% } %>
                                                             <% Calendarmodel cm2 = new Calendarmodel();
@@ -428,6 +430,9 @@
                             <%= df2.format(appointment.get(k).getAppnt_start_date())%>
                             <% } else {%> <%= df2.format(appointment.get(k).getAppnt_start_date())%> - <%= df2.format(appointment.get(k).getAppnt_end_date())%> <% }%></p>
                         <p>Time: <%= df3.format(appointment.get(k).getAppnt_start_time())%> - <%= df3.format(appointment.get(k).getAppnt_end_time())%></p>
+                        <%if(!appointment.get(k).getAppnt_owner().equals("null null")){ %>
+                        <p>Create by: <%=appointment.get(k).getAppnt_owner() %> <p>
+                            <% } %>
                         <p> <%= appointment.get(k).getDescription()%> </p><form action="delapp.process" method="GET">
                             <div style="height: 0px; overflow: hidden;">
                                 <input type="text" name="id" value="<%=appointment.get(k).getAppnt_no()%>" readonly>

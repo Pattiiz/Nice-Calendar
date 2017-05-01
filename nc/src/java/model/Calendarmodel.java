@@ -84,11 +84,14 @@ public class Calendarmodel {
         if (person_who.equals("student")) {
             try {
                 Statement stmt = caldtb.createStatement();
-                String sql = "SELECT appointment_id, appointment_title, description, appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username, officer_username from manage join appointment on (appointment_id = appointment_appointment_id) "
+                String sql = "SELECT appointment_id, appointment_title, description, appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username, officer_username, fname, lname from manage "
+                        + "join appointment on appointment_id = appointment_appointment_id "
+                        + "left outer join teacher on teacher_username = username "
                         + "where (appointment_date = '" + year + "-" + month + "-" + day + "' "
                         + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' ) and student_student_id ='" + user + "'"
                         + "union all "
-                        + "SELECT * from appointment where appointment_type = 'university'"
+                        + "SELECT  appointment_id, appointment_title, description, appointment_date, appointment_end_date, appointment_time, appointment_end_time, appointment_type, teacher_username, officer_username, Null as fname, Null as lname "
+                        + "from appointment where appointment_type = 'university'"
                         + " and (appointment_date = '" + year + "-" + month + "-" + day + "' "
                         + "or appointment_end_date ='" + year + "-" + month + "-" + day + "')";
 
@@ -104,6 +107,7 @@ public class Calendarmodel {
                     ap.setAppnt_start_time(rs.getTime("appointment_time"));
                     ap.setAppnt_end_time(rs.getTime("appointment_end_time"));
                     ap.setAppnt_type(rs.getString("appointment_type"));
+                    ap.setAppnt_owner(rs.getString("fname")+" "+rs.getString("lname"));
                     app.add(ap);
                 }
             } catch (SQLException ex) {
@@ -113,6 +117,7 @@ public class Calendarmodel {
             try {
                 Statement stmt = caldtb.createStatement();
                 String sql2 = "SELECT * from appointment "
+                        + "join teacher on teacher_username = username "
                         + "where (appointment_date = '" + year + "-" + month + "-" + day + "' "
                         + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' )and teacher_username ='" + user + "'";
                 ResultSet rs = stmt.executeQuery(sql2);
@@ -126,6 +131,7 @@ public class Calendarmodel {
                     ap.setAppnt_start_time(rs.getTime("appointment_time"));
                     ap.setAppnt_end_time(rs.getTime("appointment_end_time"));
                     ap.setAppnt_type(rs.getString("appointment_type"));
+                    ap.setAppnt_owner(rs.getString("fname")+" "+rs.getString("lname"));
                     app.add(ap);
                 }
             } catch (SQLException ex) {
@@ -134,7 +140,8 @@ public class Calendarmodel {
         } else if (person_who.equals("staff")) {
             try {
                 Statement stmt = caldtb.createStatement();
-                String sql3 = "SELECT * from appointment"
+                String sql3 = "SELECT * from appointment "
+                        + "join officer on officer_username = username "
                         + "where appointment_date = '" + year + "-" + month + "-" + day + "' "
                         + "or appointment_end_date ='" + year + "-" + month + "-" + day + "' and officer_username ='" + user + "'";
                 ResultSet rs = stmt.executeQuery(sql3);
@@ -148,6 +155,7 @@ public class Calendarmodel {
                     ap.setAppnt_start_time(rs.getTime("appointment_time"));
                     ap.setAppnt_end_time(rs.getTime("appointment_end_time"));
                     ap.setAppnt_type(rs.getString("appointment_type"));
+                    ap.setAppnt_owner(rs.getString("fname")+" "+rs.getString("lname"));
                     app.add(ap);
                 }
             } catch (SQLException ex) {

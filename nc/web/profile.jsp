@@ -40,17 +40,19 @@
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li><a href="main.jsp" class="nav-ls-color">Home</a></li>
-                                    <li><a href="schedule.jsp" class="nav-ls-color" >Class schedule</a></li>
                                     <% if(person_who.equals("student")){ %>
-                                        <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
+                                        <li><a href="schedule.jsp" class="nav-ls-color" >Class schedule</a></li>
+                                        <% } %>
+                                    <% if(person_who.equals("student") || person_who.equals("staff")){ %>
+                                        <li><a href="find-a-teacher.html" class="nav-ls-color" >Busy finder</a></li>
                                         <%}else{%>
-                                        <li><a href="find-a-student.jsp" class="nav-list-detail" >Busy finder</a></li>
+                                        <li><a href="find-a-student.jsp" class="nav-ls-color" >Busy finder</a></li>
                                         <%} %>
                                     <li><a href="vote.jsp" class="nav-ls-color" >Appointment vote</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="active"><a href="profile.jsp" class="activecover" >Profile</a></li>
-                                    <li><a class="nav-ls-color" href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                                    <li><a class="nav-ls-color" href="logout.process"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -28,7 +28,7 @@
                         <p><nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand list-detail nav-list-detail" href="#">ESMICs</a>
+                                    <a class="navbar-brand list-detail nav-list-detail" href="main.jsp">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                                         <span class="icon-bar-inverse icon-bar"></span>
                                         <span class="icon-bar-inverse icon-bar"></span>
@@ -39,11 +39,11 @@
                                     <ul class="nav navbar-nav">
                                         <li><a href="main.jsp" class="nav-list-detail">Home</a></li>
                                         <li><a href="schedule.jsp" class="nav-list-detail">Class schedule</a></li>
-                                        <li class="active"><a href="#" class="activecover">Busy finder</a></li>
+                                        <li class="active"><a href="find-a-teacher.html" class="activecover">Busy finder</a></li>
                                         <li><a href="vote.jsp" class="nav-list-detail">Appointment vote</a></li>	
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="profile-teacher.html" class="nav-list-detail" >Profile</a></li>
+                                        <li><a href="profile.jsp" class="nav-list-detail" >Profile</a></li>
                                         <li><a href="logout.process" class="nav-list-detail" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                                     </ul>
                                 </div>

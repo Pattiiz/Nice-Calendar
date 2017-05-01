@@ -20,7 +20,8 @@
     </head>
 
     <body>
-        <% String result = (String)session.getAttribute("fts"); %>
+        <% String result = (String)session.getAttribute("fts"); 
+        String person_who = (String) session.getAttribute("who");%>
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
                 <div class="cover-container">
@@ -28,7 +29,7 @@
                         <p><nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand list-detail nav-list-detail" href="#">ESMICs</a>
+                                    <a class="navbar-brand list-detail nav-list-detail" href="main.jsp">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                                         <span class="icon-bar-inverse icon-bar"></span>
                                         <span class="icon-bar-inverse icon-bar"></span>
@@ -38,9 +39,11 @@
                                 <div class="collapse navbar-collapse" id="myNavbar">
                                     <ul class="nav navbar-nav">
                                         <li><a href="main.jsp" class="nav-list-detail">Home</a></li>
-                                        <li><a href="schedule.jsp" class="nav-list-detail">Class schedule</a></li>
-                                        <li class="active"><a href="#" class="activecover">Busy finder</a></li>
-                                        <li><a href="find-a-student.html" class="nav-list-detail">Appointment vote</a></li>	
+                                        <% if(person_who.equals("student")){ %>
+                                        <li><a href="schedule.jsp" class="nav-list-detail" >Class schedule</a></li>
+                                        <% } %>
+                                        <li class="active"><a href="find-a-student.jsp" class="activecover">Busy finder</a></li>
+                                        <li><a href="vote.jsp" class="nav-list-detail">Appointment vote</a></li>	
                                     </ul>
                                     <ul class="nav navbar-nav navbar-right">
                                         <li><a href="profile.jsp" class="nav-list-detail" >Profile</a></li>

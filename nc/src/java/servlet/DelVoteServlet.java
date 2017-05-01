@@ -56,7 +56,7 @@ public class DelVoteServlet extends HttpServlet {
                         + "where poll_id =" + id;
                 ResultSet rs = stmt.executeQuery(sql1);
                 if (rs.next()) {
-                    if (rs.getString("teacher_username").equals(id)) {
+                    if (rs.getString("teacher_username").equals(user_id)) {
                         del_flag = 1;
                     }
                 }

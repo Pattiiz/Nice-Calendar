@@ -27,20 +27,23 @@
     </head>
     <body>
         <%ServletContext ctx = getServletContext();
-            Connection caldtb = (Connection) ctx.getAttribute("connection"); %>
+            Connection caldtb = (Connection) ctx.getAttribute("connection");
+            String person_who = (String) session.getAttribute("who");%>
         <div class="site-wrapper">
             <div class="cover-container">
                 <div class="row-fluid padding-top-10">
                     <nav class="navbar navbar-default navbarcover">
                         <div class="container-fluid">
-                            <div class="navbar-header"> <a class="navbar-brand nav-ls-color" href="#">ESMICs</a>
+                            <div class="navbar-header"> <a class="navbar-brand nav-ls-color" href="main.jsp">ESMICs</a>
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar-color icon-bar"></span> <span class="icon-bar-color icon-bar"></span> <span class="icon-bar-color icon-bar"></span> </button>
                             </div>
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="main.html" class="nav-ls-color">Home</a></li>
-                                    <li><a href="schedule.jsp" class="nav-ls-color">Class schedule</a></li>
-                                    <li class="active"><a href="find-a-student.html" class="activecover">Busy finder</a></li>
+                                    <li><a href="main.jsp" class="nav-ls-color">Home</a></li>
+                                    <% if(person_who.equals("student")){ %>
+                                        <li><a href="schedule.jsp" class="nav-ls-color" >Class schedule</a></li>
+                                        <% } %>
+                                    <li class="active"><a href="find-a-student.jsp" class="activecover">Busy finder</a></li>
                                     <li><a href="vote.jsp" class="nav-ls-color">Appointment vote</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">

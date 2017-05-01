@@ -23,6 +23,7 @@ public class Appointment {
     private Time appnt_start_time;
     private Time appnt_end_time;
     private String appnt_type;
+    private String appnt_owner;
 
     /**
      * @return the appnt_no
@@ -134,5 +135,19 @@ public class Appointment {
      */
     public void setAppnt_type(String appnt_type) {
         this.appnt_type = appnt_type;
+    }
+
+    /**
+     * @return the appnt_owner
+     */
+    public String getAppnt_owner() {
+        return appnt_owner;
+    }
+
+    /**
+     * @param appnt_owner the appnt_owner to set
+     */
+    public void setAppnt_owner(String appnt_owner) {
+        this.appnt_owner = appnt_owner;
     }
 }

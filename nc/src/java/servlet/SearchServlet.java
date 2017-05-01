@@ -51,6 +51,7 @@ public class SearchServlet extends HttpServlet {
             String user_id = (String) session.getAttribute("user_id");
             String keyword = request.getParameter("search");
             List<Appointment> app = new ArrayList<>();
+            System.out.println(keyword);
             
             if(who.equals("student")){
                 try {
@@ -59,9 +60,8 @@ public class SearchServlet extends HttpServlet {
                             + "join appointment on appointment_appointment_id = appointment_id"
                             + " where student_student_id='" + user_id + "' and ("
                             + "appointment_id like '%" + keyword + "%' "
-                            + "or description like '%" + keyword + "%' "
-                            + "or appointment_date like '%" + keyword + "%' "
-                            + "or appointment_end_date like '%" + keyword + "%')";
+                            + "or appointment_title like '%" + keyword + "%' "
+                            + "or description like '%" + keyword + "%' )";
                     ResultSet rs = stmt.executeQuery(sql);
                     while (rs.next()) {
                     Appointment ap = new Appointment();
@@ -86,9 +86,7 @@ public class SearchServlet extends HttpServlet {
                     String sql2 = "Select * from appointment"
                             + " where teacher_username='" + user_id + "' and ("
                             + "appointment_id like '%" + keyword + "%' "
-                            + "or description like '%" + keyword + "%' "
-                            + "or appointment_date like '%" + keyword + "%' "
-                            + "or appointment_end_date like '%" + keyword + "%')";
+                            + "or description like '%" + keyword + "%') ";
                     ResultSet rs2 = stmt.executeQuery(sql2);
                     while (rs2.next()) {
                     Appointment ap = new Appointment();
@@ -111,10 +109,8 @@ public class SearchServlet extends HttpServlet {
                     Statement stmt = caldtb.createStatement();
                     String sql3 = "Select * from appointment"
                             + " where officer_username='" + user_id + "' and ("
-                            + "appointment_id like '%" + keyword + "%' "
-                            + "or description like '%" + keyword + "%' "
-                            + "or appointment_date like '%" + keyword + "%' "
-                            + "or appointment_end_date like '%" + keyword + "%')";
+                            + "appointment_id = '%" + keyword + "%' "
+                            + "or description = '%" + keyword + "%') ";
                     ResultSet rs3 = stmt.executeQuery(sql3);
                     while (rs3.next()) {
                     Appointment ap = new Appointment();

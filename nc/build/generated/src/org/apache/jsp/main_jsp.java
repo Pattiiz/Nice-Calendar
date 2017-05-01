@@ -159,15 +159,21 @@ if (request.getParameter("dsp_method") != null) {
       out.write("                        <p>\n");
       out.write("                        <nav class=\"navbar navbarcover navbar-default\">\n");
       out.write("                            <div class=\"container-fluid\">\n");
-      out.write("                                <div class=\"navbar-header\"> <a class=\"navbar-brand list-detail nav-list-detail\" href=\"#\">ESMICs</a>\n");
+      out.write("                                <div class=\"navbar-header\"> <a class=\"navbar-brand list-detail nav-list-detail\" href=\"main.jsp\">ESMICs</a>\n");
       out.write("                                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#myNavbar\"> <span class=\"icon-bar-inverse icon-bar\"></span> <span class=\"icon-bar-inverse icon-bar\"></span> <span class=\"icon-bar-inverse icon-bar\"></span> </button>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"collapse navbar-collapse\" id=\"myNavbar\">\n");
       out.write("                                    <ul class=\"nav navbar-nav\">\n");
       out.write("                                        <li class=\"active\"><a href=\"main.jsp\" class=\"activecover\">Home</a></li>\n");
-      out.write("                                        <li><a href=\"schedule.jsp\" class=\"nav-list-detail\" >Class schedule</a></li>\n");
       out.write("                                        ");
  if(person_who.equals("student")){ 
+      out.write("\n");
+      out.write("                                        <li><a href=\"schedule.jsp\" class=\"nav-list-detail\" >Class schedule</a></li>\n");
+      out.write("                                        ");
+ } 
+      out.write("\n");
+      out.write("                                        ");
+ if(person_who.equals("student") || person_who.equals("staff")){ 
       out.write("\n");
       out.write("                                        <li><a href=\"find-a-teacher.html\" class=\"nav-list-detail\" >Busy finder</a></li>\n");
       out.write("                                        ");

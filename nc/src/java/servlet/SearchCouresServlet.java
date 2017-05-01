@@ -8,6 +8,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -49,10 +50,9 @@ public class SearchCouresServlet extends HttpServlet {
             String branch = request.getParameter("branch");
             String year_app = request.getParameter("year");
             String term = request.getParameter("term");
-            String course;
-            if (request.getParameter("course") != null) {
-                course = request.getParameter("course");
-            } else {
+            String course = request.getParameter("course");
+
+            if (course.length() < 1) {
                 course = "all";
             }
             if (year_app.equals("all")) {
@@ -69,10 +69,10 @@ public class SearchCouresServlet extends HttpServlet {
             cou.setYear(Integer.parseInt(year_app));
             cou.setTerm(Integer.parseInt(term));
             List<Course> cou_li = cou.getSchedule(caldtb);
-            session.setAttribute("cou_search", cou_li);
-            System.out.println(cou_li.size());
-            System.out.println(cou_li.get(1).getTeacher());
-            System.out.println("hey");
+            session.removeAttribute("cou_search");
+            if (cou_li.size() > 0) {
+                session.setAttribute("cou_search", cou_li);
+            }
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/schedule-result.jsp");
             dispatcher.forward(request, response);
         }

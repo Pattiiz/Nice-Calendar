@@ -36,7 +36,7 @@
                     <nav class="navbar navbar-default navbarcover">
                         <div class="container-fluid">
                             <div class="navbar-header">
-                                <a class="navbar-brand nav-ls-color" href="#">ESMICs</a>
+                                <a class="navbar-brand nav-ls-color" href="main.jsp">ESMICs</a>
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                                     <span class="icon-bar-color icon-bar"></span>
                                     <span class="icon-bar-color icon-bar"></span>
@@ -46,11 +46,11 @@
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav">
                                     <li><a href="main.jsp" class="nav-ls-color">Home</a></li>
-                                    <li class="active"><a href="search-course.html" class="activecover" >Class schedule</a></li>
-                                    <% if(person_who.equals("student")){ %>
-                                        <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
+                                    <li class="active"><a href="schedule.jsp" class="activecover" >Class schedule</a></li>
+                                    <% if(person_who.equals("student") || person_who.equals("staff")){ %>
+                                        <li><a href="find-a-teacher.html" class="nav-ls-color" >Busy finder</a></li>
                                         <%}else{%>
-                                        <li><a href="find-a-student.jsp" class="nav-list-detail" >Busy finder</a></li>
+                                        <li><a href="find-a-student.jsp" class="nav-ls-color" >Busy finder</a></li>
                                         <%} %>
                                     <li><a href="vote.jsp" class="nav-ls-color" >Appointment vote</a></li>
 
@@ -134,7 +134,7 @@
                         </div>
                         <div class="text-center padding-bott-10">
                             
-                                <div class="btn btn-default padding" type="submit">Search</div>
+                                <button class="btn btn-default padding" type="submit">Search</button>
                             </a>
                         </div>
                     </div></form>

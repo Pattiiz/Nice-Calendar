@@ -49,14 +49,16 @@
                         <p>
                         <nav class="navbar navbarcover navbar-default">
                             <div class="container-fluid">
-                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="#">ESMICs</a>
+                                <div class="navbar-header"> <a class="navbar-brand list-detail nav-list-detail" href="main.jsp">ESMICs</a>
                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> <span class="icon-bar-inverse icon-bar"></span> </button>
                                 </div>
                                 <div class="collapse navbar-collapse" id="myNavbar">
                                     <ul class="nav navbar-nav">
                                         <li><a href="main.jsp" class="nav-list-detail" >Home</a></li>
-                                        <li><a href="schedule.jsp" class="nav-list-detail" >Class schedule</a></li>
                                         <% if(person_who.equals("student")){ %>
+                                        <li><a href="schedule.jsp" class="nav-list-detail" >Class schedule</a></li>
+                                        <% } %>
+                                        <% if(person_who.equals("student") || person_who.equals("staff")){ %>
                                         <li><a href="find-a-teacher.html" class="nav-list-detail" >Busy finder</a></li>
                                         <%}else{%>
                                         <li><a href="find-a-student.jsp" class="nav-list-detail" >Busy finder</a></li>
