@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,27 +194,30 @@ public class Time {
 
     }
     
-    public String getFreeTimeTecher(Connection caldtb){
-        String status = "low";
-        int count = 0;
+    public List <String> getFreeTimeTecher(Connection caldtb){
+        List <String> status_li = new ArrayList();
+        DateFormat df = new SimpleDateFormat("HH");
+        for(int i=0; i < 11; i++){
+            status_li.add("0");
+        }
         try {
             Statement stmt = caldtb.createStatement();
             String sql2="Select * from appointment "
                     + "where teacher_username ='" + this.username + "' and appointment_date='" + this.year + "-" + this.month + "-" + this.day + "'";
             ResultSet rs2 = stmt.executeQuery(sql2);
             while(rs2.next()){
-                count++;
-            }
-            System.out.println(this.username);
-            if(count>4){
-                status = "high";
-            }else if (count>2){
-                status = "mid";
+                int start_time = Integer.parseInt(df.format(rs2.getTime("appointment_time")));
+                int end_time = Integer.parseInt(df.format(rs2.getTime("appointment_end_time")));
+                for(int j=0; j < status_li.size(); j++){
+                    if(j+8 >= start_time && j+8 < end_time){
+                        status_li.set(j, "1");
+                    }
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Time.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return status;
+        return status_li;
         
     }
 

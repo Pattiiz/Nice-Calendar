@@ -8,6 +8,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +42,6 @@ public class FreeTimeTeacherServ extends HttpServlet {
             Connection caldtb = (Connection) ctx.getAttribute("connection");
             HttpSession session = request.getSession();
             String date = request.getParameter("date");
-            System.out.println(date + "hereeeeee");
             String[] pre_date = date.split("-");
             String day = pre_date[0];
             String month = pre_date[1];
@@ -52,7 +52,7 @@ public class FreeTimeTeacherServ extends HttpServlet {
             tme.setDay(Integer.parseInt(day));
             tme.setMonth(Integer.parseInt(month));
             tme.setYear(Integer.parseInt(year));
-            String result = tme.getFreeTimeTecher(caldtb);
+            List <String> result = tme.getFreeTimeTecher(caldtb);
             session.setAttribute("ftt", result);
            response.sendRedirect("freetime-t.jsp");
         }

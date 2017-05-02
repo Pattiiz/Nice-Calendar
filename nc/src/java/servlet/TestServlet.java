@@ -49,8 +49,11 @@ public class TestServlet extends HttpServlet {
             out.println("<title>Servlet TestServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            String title = request.getParameter("title");
-            out.println(title);
+            test.add("10");
+            test.set(0, "20");
+            out.println(test);
+            
+
             out.println("hello");
             out.println("</body>");
             out.println("</html>");

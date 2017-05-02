@@ -4,6 +4,7 @@
     Author     : Plaster
 --%>
 
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
@@ -20,7 +21,7 @@
     </head>
 
     <body>
-        <% String result = (String)session.getAttribute("ftt"); %>
+        <% List<String> result = (List<String>) session.getAttribute("ftt"); %>
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
                 <div class="cover-container">
@@ -58,22 +59,19 @@
                                 <div class="span2"></div>
                                 <div class="span8 main-col-detail">
                                     <div class="w3-panel w3-card card-main-detail"><p>
-                                            <% if(result.equals("low")){ %>
-                                                <div class="notice notice-green">
-                                            <strong>TODAY IS FREE</strong>
+                                            <% for (int i = 0; i < result.size(); i++) {
+                                                    if (result.get(i).equals("0")) {%>
+                                        <div class="notice notice-green">
+                                            <strong><%= i + 8%>:00 - <%= i + 9%>:00</strong>
+                                            It's free
                                         </div>
-                                            <%}else if(result.equals("mid")){%>
-                                            <div class="notice notice-yellow">
-                                            <strong>TODAY IS MODERATE FREE</strong>
+                                        <%} else {%>
+                                        <div class="notice notice-red">
+                                            <strong><%= i + 8%>:00 - <%= i + 9%>:00</strong>
+                                            It's busy
                                         </div>
-                                            <% }else if(result.equals("high")){ %>
-                                            <div class="notice notice-red">
-                                            <strong>TODAY IS VERY BUSY</strong>
-                                        </div>
-                                            <%}%>
-                                        
-
-
+                                        <%}%>
+                                        <%}%>
                                         </p></div>
                                 </div>
                                 <div class="span2"></div>
@@ -88,6 +86,16 @@
                 </div>
             </div>
         </div>
-
+        <script>$(document).ready(function () {
+                var scroll_pos = 0;
+                $(document).scroll(function () {
+                    scroll_pos = $(this).scrollTop();
+                    if (scroll_pos > 20) {
+                        $(".navbarcover").css('background-color', 'rgba(104,104,104,1.0)');
+                    } else {
+                        $(".navbarcover").css('background-color', 'rgba(104,104,104,0.5)');
+                    }
+                });
+            });</script>
     </body>
 </html>
